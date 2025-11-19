@@ -1,0 +1,145 @@
+name: Deploy Next.js Client App
+
+on:
+  push:
+    branches:
+      - 'release/*'
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '22'
+
+      - name: Enable Corepack (for Yarn)
+        run: corepack enable
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile --silent 2>&1 | grep -v "unmet peer dependency" || true
+
+      - name: Build Next.js Client App
+        run: yarn build
+
+      # Create or clean client app directory on EC2
+      - name: Create or clean Client App directory on EC2
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: ${{ vars.EC2_HOST }}
+          username: ${{ vars.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          port: 22
+          script: |
+            mkdir -p /home/ec2-user/client-app
+            rm -rf /home/ec2-user/client-app/*
+
+      # Copy Next.js build output and required files to EC2
+      - name: Copy Next.js build output to EC2
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ vars.EC2_HOST }}
+          username: ${{ vars.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          port: 22
+          source: '.next,public,package.json,yarn.lock,next.config.js,tsconfig.json,middleware.ts'
+          target: '/home/ec2-user/client-app/'
+      
+      # Copy app and src folders separately
+      - name: Copy app folder to EC2
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ vars.EC2_HOST }}
+          username: ${{ vars.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          port: 22
+          source: 'app'
+          target: '/home/ec2-user/client-app/'
+      
+      - name: Copy src folder to EC2
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ vars.EC2_HOST }}
+          username: ${{ vars.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          port: 22
+          source: 'src'
+          target: '/home/ec2-user/client-app/'
+
+      # Copy ecosystem config file to EC2
+      - name: Copy Ecosystem Config to EC2
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ vars.EC2_HOST }}
+          username: ${{ vars.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          port: 22
+          source: 'ecosystem.config.cjs'
+          target: '/home/ec2-user/'
+
+      # Stop and delete old Nuxt client app from PM2 and ensure Next.js app is running
+      - name: Stop and delete old Nuxt client app
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: ${{ vars.EC2_HOST }}
+          username: ${{ vars.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          port: 22
+          script: |
+            # Stop and delete old Nuxt app
+            pm2 stop nuxt-client-app || true
+            pm2 delete nuxt-client-app || true
+            
+            # Ensure no other apps are using port 3000
+            pm2 stop next-client-app || true
+
+      # Rename nginx config file from nuxt-app.conf to next-app.conf if it exists
+      - name: Rename nginx config file
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: ${{ vars.EC2_HOST }}
+          username: ${{ vars.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          port: 22
+          script: |
+            if [ -f /etc/nginx/conf.d/nuxt-app.conf ]; then
+              sudo mv /etc/nginx/conf.d/nuxt-app.conf /etc/nginx/conf.d/next-app.conf
+              sudo nginx -t && sudo systemctl reload nginx || echo "Nginx reload skipped"
+            fi
+
+      # Install production dependencies and restart the app via PM2 on EC2
+      - name: Install dependencies and restart Next.js app via PM2
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: ${{ vars.EC2_HOST }}
+          username: ${{ vars.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          port: 22
+          script: |
+            cd /home/ec2-user/client-app
+            corepack enable || true
+            yarn install --production --frozen-lockfile --silent 2>&1 | grep -v "unmet peer dependency" || true
+            
+            # Verify .next directory exists and has static files
+            if [ ! -d ".next" ]; then
+              echo "ERROR: .next directory not found!"
+              exit 1
+            fi
+            
+            if [ ! -d ".next/static" ]; then
+              echo "ERROR: .next/static directory not found!"
+              exit 1
+            fi
+            
+            cd /home/ec2-user
+            pm2 restart next-client-app --update-env || pm2 start ecosystem.config.cjs --only next-client-app --update-env
+            
+            # Wait a moment and check if app is running
+            sleep 3
+            pm2 list | grep next-client-app || (echo "ERROR: next-client-app failed to start" && exit 1)
+ 

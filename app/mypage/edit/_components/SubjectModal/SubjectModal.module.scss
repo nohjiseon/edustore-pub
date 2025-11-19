@@ -1,0 +1,124 @@
+.modal_content {
+  padding: 2.5rem;
+  background-color: #fff;
+  border-radius: 1.5rem;
+  max-width: 40.625rem;
+}
+
+.modal_title {
+  width: 100%;
+  text-align: center;
+  font-size: 1.375rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-neutral-black-1);
+}
+
+.modal_body {
+  margin-block: 3rem;
+}
+
+.modal_header {
+  button {
+    display: none;
+  }
+}
+
+.interest_title_wrap {
+  width: 100%;
+  margin-bottom: 1rem;
+
+  .interest_title {
+    font-size: 1rem;
+    font-weight: var(--font-weight-semibold);
+    line-height: 125%;
+    color: var(--color-neutral-black-1);
+    margin-right: 0.625rem;
+  }
+
+  .interest_desc {
+    font-size: 0.9375rem;
+    font-weight: 300;
+    line-height: var(--line-height-normal);
+    color: var(--color-neutral-grey-3);
+    margin-right: 0;
+  }
+}
+
+.interest_input_wrap {
+  width: 100%;
+  height: 3.25rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-shrink: 0;
+  gap: 0.625rem;
+  margin-bottom: 1rem;
+
+  input {
+    width: calc(100% - 8.8125rem);
+    height: 100%;
+    border: 0.0625rem solid var(--color-neutral-l-grey-2);
+    border-radius: 0.75rem;
+    font-size: 1rem;
+    font-weight: 300;
+    color: var(--color-neutral-black-1);
+    padding: 1rem 1.375rem;
+
+    &:disabled {
+      background-color: var(--color-neutral-back);
+      cursor: not-allowed;
+    }
+
+    &::placeholder {
+      color: var(--color-neutral-grey-3);
+    }
+  }
+
+  button {
+    width: 8.1875rem !important;
+    height: 100%;
+    border-radius: 0.75rem;
+  }
+}
+
+.topics_ul_wrap {
+  margin-bottom: 0;
+
+  ul {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+
+    li {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: var(--color-neutral-back);
+      border-radius: 0.25rem;
+      padding: 0.25rem 0.5rem;
+
+      span {
+        font-size: 0.9375rem;
+        font-weight: 300;
+        color: var(--color-neutral-grey-2);
+        margin-right: 0.1875rem;
+      }
+
+      svg {
+        width: 1.5rem;
+        height: 1.5rem;
+        color: var(--color-neutral-grey-2);
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.modal_footer {
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+}

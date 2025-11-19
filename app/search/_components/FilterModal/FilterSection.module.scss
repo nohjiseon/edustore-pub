@@ -1,0 +1,36 @@
+.section {
+  margin-bottom: 2.5rem;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #0f172a;
+  margin: 0 0 1rem 0;
+  line-height: 1.5rem;
+}
+
+.options_grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4375rem;
+  align-items: flex-start;
+}
+
+.option_button {
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  display: inline-block;
+
+  &:focus {
+    outline: 0.125rem solid #3b82f6;
+    outline-offset: 0.125rem;
+    border-radius: 0.25rem;
+  }
+}

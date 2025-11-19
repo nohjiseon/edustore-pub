@@ -1,0 +1,72 @@
+.root {
+  display: inline-block;
+  position: relative;
+}
+
+.trigger {
+  all: unset;
+  display: inline-flex;
+  cursor: pointer;
+}
+
+.content {
+  position: fixed;
+  top: var(--dropdown-top);
+  left: var(--dropdown-left);
+
+  background-color: var(--color-neutral-white);
+  border-radius: 0.625rem;
+  box-shadow: 0 0.5rem 1rem 0 rgba(171, 190, 209, 0.4); // 피그마 디자인 그림자
+  padding: 0.375rem;
+  min-width: 7.5rem; // 최소 너비 설정
+  z-index: 50;
+
+  // 애니메이션
+  animation: fade-in 0.15s ease-out;
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  // align 별 transform
+  &[data-align='center'] {
+    transform: translateX(-50%);
+  }
+
+  &[data-align='end'] {
+    transform: translateX(-100%);
+  }
+
+  // side='left'일 때: 트리거 왼쪽에 표시
+  &[data-side='left'] {
+    transform: translateX(-100%);
+  }
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  padding: 0.5625rem 1rem;
+  font-size: 0.9375rem;
+  font-weight: var(--font-weight-regular);
+  color: var(--color-neutral-black-2);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  outline: none;
+  user-select: none;
+  transition: background-color 0.15s ease;
+
+  &:hover {
+    background-color: var(--color-neutral-back);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  &:focus {
+    background-color: var(--color-neutral-back);
+  }
+}

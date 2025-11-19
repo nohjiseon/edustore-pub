@@ -1,0 +1,285 @@
+@use '@/styles/mixin.scss' as *;
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 2rem 0;
+}
+
+// 필터 섹션
+.filter_section {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1rem;
+}
+
+.search_box {
+  position: relative;
+  width: 20rem;
+
+  input {
+    width: 100%;
+    padding: 0.875rem 1.5rem 0.875rem 1.875rem;
+    font-size: 0.875rem;
+    color: var(--color-neutral-black-1);
+    background-color: var(--color-neutral-white);
+    border: 1px solid var(--color-neutral-l-grey-2);
+    border-radius: 6.25rem;
+
+    &:focus {
+      outline: none;
+      border-color: var(--color-primary);
+    }
+
+    &::placeholder {
+      color: var(--color-neutral-grey-3);
+    }
+  }
+
+  svg {
+    position: absolute;
+    right: 1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--color-neutral-grey-2);
+    pointer-events: none;
+  }
+}
+
+// 리뷰 리스트
+.review_list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.review_item {
+  background-color: #fff;
+  border-radius: 1.5rem;
+  overflow: hidden;
+}
+
+.review_container {
+  display: flex;
+  flex-direction: column;
+  max-width: 85rem;
+  margin: 0 auto;
+  padding: 1.875rem 2.5rem;
+}
+
+// 상품 정보
+.product_info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.75rem 2.5rem;
+  border-bottom: 1px solid var(--color-neutral-l-grey-2);
+}
+
+.product_status {
+  display: flex;
+  gap: 0.625rem;
+  align-items: center;
+  color: var(--color-neutral-grey-2);
+  font-weight: var(--font-weight-medium);
+
+  span {
+    display: flex;
+    align-items: center;
+    &:first-child {
+      &::after {
+        content: '';
+        display: block;
+        width: 1px;
+        height: 0.75rem;
+        background-color: var(--color-neutral-grey-2);
+        margin-left: 0.625rem;
+      }
+    }
+  }
+
+  .completed {
+    color: var(--color-primary);
+  }
+
+  .waiting {
+    color: var(--color-neutral-grey-2);
+  }
+}
+
+// 우측 컨텐츠 섹션
+.content_section {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  align-items: flex-start;
+  width: 100%;
+  flex-shrink: 1;
+  min-width: 0;
+}
+
+// 메인 영역
+.content_main {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: flex-start;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+// 메인 컨텐츠 + 이미지 래퍼
+.content_wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 2.5rem;
+  align-items: flex-end;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.main_content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  align-items: flex-start;
+  justify-content: center;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+// 헤더 (사용자명 + 날짜)
+.header {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  flex-shrink: 0;
+}
+
+.user_info {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  line-height: 0;
+  white-space: nowrap;
+}
+
+.author {
+  font-size: 1.125rem;
+  font-weight: var(--font-weight-medium);
+  line-height: 1.35;
+  letter-spacing: -0.0225rem;
+  color: var(--color-neutral-black-2);
+}
+
+.date {
+  font-size: 0.875rem;
+  font-weight: 300;
+  line-height: 1.35;
+  letter-spacing: -0.00875rem;
+  color: var(--color-neutral-grey-2);
+}
+
+// 리뷰 텍스트
+.review_content {
+  font-size: 1.125rem;
+  font-weight: var(--font-weight-regular);
+  line-height: 1.35;
+  letter-spacing: -0.0225rem;
+  color: var(--color-neutral-black-2);
+  width: 100%;
+  margin: 0;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  padding-bottom: 0.75rem;
+}
+
+.question_block {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+
+  svg {
+    flex-shrink: 0;
+    color: var(--color-primary);
+  }
+}
+
+.reply_input_wrap {
+  padding-top: 1.875rem;
+  padding-inline: 2.5rem;
+
+  .reply_input {
+    width: 100%;
+    height: 3.75rem;
+    font-size: 1rem;
+    padding-inline: 1.5rem;
+    background-color: #edf0f6;
+    border-radius: 0.75rem;
+
+    &:focus {
+      outline: none;
+    }
+
+    &::placeholder {
+      color: #333;
+    }
+  }
+}
+
+// 답변 목록
+.replies_list {
+  margin-top: 1rem;
+  padding-inline: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  .reply_item {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1rem;
+    background-color: #edf0f6;
+    border-radius: 0.75rem;
+
+    .reply_content {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--color-neutral-black-2);
+      white-space: pre-wrap;
+    }
+
+    .reply_txtbox {
+      display: flex;
+      align-items: center;
+      gap: 0.5625rem;
+
+      .reply_author {
+        font-size: 1rem;
+        font-weight: var(--font-weight-medium);
+        color: var(--color-neutral-black-2);
+      }
+
+      .reply_date {
+        font-size: 0.875rem;
+        font-weight: var(--font-weight-light);
+        color: var(--color-neutral-grey-2);
+      }
+    }
+  }
+}
+
+// 더보기 버튼
+.more_button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  cursor: pointer;
+  color: var(--color-neutral-grey-3);
+}

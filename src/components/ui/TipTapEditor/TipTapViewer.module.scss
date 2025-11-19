@@ -1,0 +1,11 @@
+@use '@/styles/tiptap';
+
+.viewer {
+  :global {
+    .tiptap {
+      @include tiptap.tiptap-content;
+    }
+  }
+
+  // 뷰어 전용 추가 스타일이 필요한 경우 여기에 작성
+}

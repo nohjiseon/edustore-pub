@@ -1,0 +1,45 @@
+.star_rating {
+  display: flex;
+  align-items: center;
+  gap: 0.3125rem;
+}
+
+.stars {
+  display: flex;
+  align-items: center;
+  gap: 0.0625rem;
+  height: 1rem;
+}
+
+.star_filled {
+  width: 1rem;
+  height: 1rem;
+  color: #ffd700;
+  fill: currentColor;
+  flex-shrink: 0;
+}
+
+.star_half {
+  width: 1rem;
+  height: 1rem;
+  color: #ffd700;
+  fill: currentColor;
+  opacity: 0.5;
+  flex-shrink: 0;
+}
+
+.star_empty {
+  width: 1rem;
+  height: 1rem;
+  color: #dae1e7;
+  fill: currentColor;
+  flex-shrink: 0;
+}
+
+.score {
+  font-family: 'Pretendard', sans-serif;
+  font-size: 0.9375rem;
+  font-weight: 400;
+  color: #333333;
+  letter-spacing: -0.009375rem;
+}

@@ -1,0 +1,31 @@
+import * as React from 'react'
+import type { SVGProps } from 'react'
+const SvgStore = (props: SVGProps<SVGSVGElement>) => (
+  <svg fill='none' viewBox='0 0 17 16' width='1em' height='1em' {...props}>
+    <path
+      stroke='currentColor'
+      strokeLinecap='round'
+      strokeLinejoin='round'
+      strokeMiterlimit={10}
+      strokeWidth={0.9}
+      d='M.467 5.51 2.94.77c.093-.198.27-.32.462-.32h8.166'
+    />
+    <path
+      stroke='currentColor'
+      strokeLinecap='round'
+      strokeLinejoin='round'
+      strokeMiterlimit={10}
+      strokeWidth={0.9}
+      d='M16.28 5.51 13.807.77c-.094-.198-.27-.32-.462-.32h-1.802M9.958 6.474c0 .702-.71 1.27-1.584 1.27-.876 0-1.585-.568-1.585-1.27m0 0c0 .702-.71 1.27-1.585 1.27-.874 0-1.584-.568-1.584-1.27m9.507 0c0 .702-.709 1.27-1.584 1.27s-1.585-.568-1.585-1.27'
+    />
+    <path
+      stroke='currentColor'
+      strokeLinecap='round'
+      strokeLinejoin='round'
+      strokeMiterlimit={10}
+      strokeWidth={0.9}
+      d='M3.62 6.474c0 .702-.71 1.27-1.585 1.27S.45 7.176.45 6.474v-.93m12.677.93c0 .702.71 1.27 1.585 1.27s1.585-.568 1.585-1.27v-.93M.807 15.385h15.168m-13.669 0V7.748m12.278 7.637V7.748M7.73 15.385V9.253H4.377v6.132m2.212-3.739v.602M.78 5.49h15.203'
+    />
+  </svg>
+)
+export default SvgStore

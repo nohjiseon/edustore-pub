@@ -1,0 +1,41 @@
+.textarea_wrapper {
+  padding: 1.125rem 1.25rem;
+  border: 1px solid var(--color-neutral-l-grey-1);
+  border-radius: 0.75rem;
+}
+
+.textarea {
+  width: 100%;
+  min-height: 5rem;
+  padding: 0;
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--color-neutral-black-1);
+  background: none;
+  border: none;
+  outline: none;
+  resize: none;
+  letter-spacing: -0.02em;
+  line-height: 1.35;
+
+  &::placeholder {
+    color: var(--color-neutral-grey-3);
+  }
+
+  &:disabled {
+    color: var(--color-neutral-grey-2);
+    cursor: not-allowed;
+  }
+
+  &.error {
+    color: var(--color-error);
+  }
+}
+
+.char_count {
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: var(--color-neutral-grey-3);
+  text-align: right;
+  letter-spacing: -0.01em;
+}

@@ -1,0 +1,161 @@
+.wrapper {
+  width: 100%;
+
+  .con_box {
+    max-width: 92.5rem;
+    margin: 0 auto;
+    padding-inline: 1.25rem;
+  }
+}
+
+.top_imgbox {
+  width: 100%;
+  max-width: 160rem;
+  margin: 0 auto;
+  height: 26.25rem;
+  overflow: hidden;
+  position: relative;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .hidden_input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
+  .image_replace_label {
+    position: absolute;
+    bottom: 10.625rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    padding-block: 0.625rem;
+    color: #fff;
+    font-size: 1rem;
+    border-bottom: 1px solid var(--color-neutral-white);
+    cursor: pointer;
+  }
+}
+
+/* 프로필 섹션 */
+.profile_section {
+  margin-top: -4.75rem;
+  padding-inline: 1.25rem;
+  text-align: center;
+
+  .profile_wrap {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 2.5rem;
+    margin-bottom: 1.875rem;
+
+    .profile_img {
+      position: relative;
+      width: 7.75rem;
+      height: 7.75rem;
+      border: 2px solid var(--color-primary);
+      border-radius: 100%;
+      cursor: pointer;
+
+      .hidden_input {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border-width: 0;
+      }
+
+      img {
+        object-fit: cover;
+        height: 100%;
+        border-radius: 100%;
+      }
+      .ic_edit {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 100%;
+        background-color: var(--color-primary);
+        color: var(--color-neutral-white);
+      }
+    }
+    .delete_btn {
+      font-size: 1rem;
+      color: var(--color-neutral-grey-3);
+    }
+    .name_input {
+      width: 100%;
+      max-width: 72.5rem;
+      margin: 0 auto;
+      font-size: 2rem;
+      height: 5.3125rem;
+      font-weight: var(--font-weight-semibold);
+      color: #252525;
+      border: 1px solid var(--color-neutral-l-grey-2);
+      text-align: center;
+      border-radius: 1.5rem;
+    }
+  }
+
+  .stats {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 2.5rem;
+
+    .stat_item {
+      padding: 0.625rem 1.25rem 0.625rem 1.125rem;
+      background-color: #f9f9fa;
+      border-radius: 6.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1rem;
+      color: rgba(0, 0, 0, 0.85);
+    }
+  }
+
+  .my_info_textarea {
+    padding-block: 2.5rem;
+    height: 12.5rem;
+    width: 100%;
+    max-width: 72.5rem;
+    margin: 0 auto;
+    border: 1px solid var(--color-neutral-l-grey-2);
+    border-radius: 1.5rem;
+    padding-inline: 1.25rem;
+    font-size: 1.125rem;
+    color: rgba(37, 37, 37, 0.8);
+    margin-bottom: 3.75rem;
+    text-align: center;
+  }
+  .btn_box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 5rem;
+    gap: 0.625rem;
+  }
+}

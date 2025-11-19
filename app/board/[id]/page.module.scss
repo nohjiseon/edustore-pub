@@ -1,0 +1,228 @@
+.wrapper {
+  width: 100%;
+  margin-top: 13.75rem;
+  max-width: 75rem;
+  padding-inline: 1.25rem;
+
+  pre {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 1.125rem;
+    line-height: 1.4;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    color: #121314;
+  }
+}
+
+/* Form */
+.title_wrap {
+  text-align: center;
+  margin-bottom: 5rem;
+
+  & .title {
+    font-size: 2.8125rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--color-neutral-black-1);
+    margin-bottom: 1rem;
+  }
+
+  & .description {
+    font-size: 1.125rem;
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-tight);
+    color: var(--color-neutral-grey-3);
+  }
+}
+
+.detail_wrap {
+  .info_txt {
+    padding-block: 1.1875rem;
+    background-color: var(--color-primary);
+    color: var(--color-neutral-white);
+    border-radius: 0.75rem;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: var(--font-weight-semibold);
+  }
+  .date_box {
+    display: flex;
+    padding: 0.9688rem 1.25rem;
+    font-size: 1rem;
+    font-weight: 300;
+    color: var(--color-neutral-grey-2);
+    border-bottom: 1px solid var(--color-neutral-l-grey-2);
+    margin-bottom: 3.75rem;
+
+    span {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+    span ~ span {
+      &::before {
+        content: '|';
+        display: block;
+        margin-left: 1.25rem;
+      }
+    }
+  }
+
+  .tag_wrap {
+    display: flex;
+    margin-top: 3.75rem;
+    pointer-events: none;
+    div {
+      color: #333;
+    }
+  }
+}
+
+// 댓글
+.comment_section {
+  margin-top: 5rem;
+  padding-top: 5rem;
+  border-top: 1px solid var(--color-neutral-l-grey-2);
+
+  .comment_title {
+    display: flex;
+    font-size: 1.375rem;
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-neutral-black-1);
+    margin-bottom: 3rem;
+
+    .comment_count {
+      color: var(--color-primary);
+      margin-left: 0.5rem;
+    }
+  }
+
+  .comment_list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .comment_item {
+    padding-bottom: 1.875rem;
+    border-bottom: 1px solid var(--color-neutral-l-grey-1);
+
+    .comment_header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+
+      .comment_author {
+        font-size: 1.125rem;
+        font-weight: var(--font-weight-medium);
+        color: #333;
+      }
+
+      .comment_date {
+        font-size: 0.875rem;
+        font-weight: 300;
+        color: var(--color-neutral-grey-2);
+        margin-left: 0.75rem;
+      }
+
+      .menu_button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0.25rem;
+        color: var(--color-neutral-grey-3);
+        transition: color 0.2s;
+
+        &:hover {
+          color: var(--color-neutral-black-1);
+        }
+      }
+    }
+
+    .comment_content {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--color-neutral-black-2);
+      white-space: pre-wrap;
+    }
+
+    // 답변 목록
+    .replies_list {
+      margin-top: 1rem;
+      padding-left: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+
+      .reply_item {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        padding: 1rem;
+        background-color: #edf0f6;
+        border-radius: 0.75rem;
+
+        .reply_content {
+          font-size: 1rem;
+          line-height: 1.6;
+          color: var(--color-neutral-black-2);
+          white-space: pre-wrap;
+        }
+
+        .reply_txtbox {
+          display: flex;
+          align-items: center;
+          gap: 0.5625rem;
+
+          .reply_author {
+            font-size: 1rem;
+            font-weight: var(--font-weight-medium);
+            color: var(--color-neutral-black-2);
+          }
+
+          .reply_date {
+            font-size: 0.875rem;
+            font-weight: var(--font-weight-light);
+            color: var(--color-neutral-grey-2);
+          }
+        }
+      }
+    }
+
+    .reply_input_wrap {
+      padding-top: 1.875rem;
+      padding-left: 2.5rem;
+
+      .reply_input {
+        width: 100%;
+        height: 3.75rem;
+        font-size: 1rem;
+        padding-inline: 1.5rem;
+        background-color: #edf0f6;
+        border-radius: 0.75rem;
+
+        &:focus {
+          outline: none;
+        }
+
+        &::placeholder {
+          color: #333;
+        }
+      }
+    }
+  }
+
+  .pagination_wrap {
+    margin-top: 3rem;
+  }
+}
+
+.btn_wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 7.5rem;
+}

@@ -1,0 +1,25 @@
+.copy_button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.4375rem 1.0625rem;
+  background-color: var(--color-neutral-white);
+  border: 1px solid var(--color-neutral-l-grey-1);
+  border-radius: 6.25rem;
+  font-size: 0.9375rem;
+  width: auto;
+  cursor: pointer;
+  color: var(--color-neutral-grey-1);
+  white-space: nowrap;
+  transition: all 0.2s;
+  letter-spacing: -0.3px;
+  flex-shrink: 0;
+
+  &:hover {
+    background-color: var(--color-neutral-b-grey-1);
+  }
+
+  &:active {
+    background-color: var(--color-neutral-l-grey-1);
+  }
+}

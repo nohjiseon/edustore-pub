@@ -1,0 +1,47 @@
+@use 'sass:map';
+
+$breakpoints: (
+  md: 1280,
+  sm: 768
+);
+
+/* =====================================
+   Typography mixins (text, headline)
+   - 전역 CSS 변수(:root) 기반 사용
+   - 토큰 생성은 global.scss에서 수행
+===================================== */
+@mixin text($scale, $weight: regular) {
+  font-family: var(--font-family-primary), serif;
+  font-size: var(--text-body-#{$scale}-#{$weight}-size);
+  line-height: var(--text-body-#{$scale}-#{$weight}-line-height);
+  font-weight: var(--text-body-#{$scale}-#{$weight}-weight);
+}
+
+@mixin headline($level) {
+  font-family: var(--text-headline-#{$level}-family), serif;
+  font-size: var(--text-headline-#{$level}-size);
+  line-height: var(--text-headline-#{$level}-line-height);
+  font-weight: var(--text-headline-#{$level}-weight);
+}
+
+@mixin breakpoint_down($size: md) {
+  $value: map.get($breakpoints, $size);
+  @if $value == null {
+    @error 'Unknown breakpoint `#{$size}`. Allowed: #{map-keys($breakpoints)}';
+  }
+  @media only screen and (max-width: #{$value}px) {
+    @content;
+  }
+}
+
+@mixin breakpoint_up($size: 1281px) {
+  @media only screen and (min-width: #{$size}) {
+    @content;
+  }
+}
+
+@mixin breakpoint_between($min-value, $max-value) {
+  @media only screen and (min-width: #{$min-value}) and (max-width: #{$max-value}) {
+    @content;
+  }
+}

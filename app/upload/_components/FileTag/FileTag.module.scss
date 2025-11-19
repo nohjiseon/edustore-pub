@@ -1,0 +1,50 @@
+.file_tag {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: fit-content;
+  padding: 0.1875rem 0.5rem 0.1875rem 0.75rem;
+  background-color: var(--color-primary-tint-1);
+  border-radius: 6.25rem;
+}
+
+.file_name {
+  font-family: var(--font-family-primary);
+  font-size: 0.875rem;
+  font-weight: var(--font-weight-regular);
+  line-height: 1.35;
+  letter-spacing: var(--letter-spacing-normal);
+  color: var(--color-primary-shade);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
+}
+
+.remove_button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-primary-shade);
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 0.7;
+  }
+
+  &:active {
+    opacity: 0.5;
+  }
+
+  &:focus-visible {
+    outline: 0.125rem solid var(--color-primary);
+    outline-offset: 0.125rem;
+    border-radius: 0.25rem;
+  }
+}

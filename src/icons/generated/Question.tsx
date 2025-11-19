@@ -1,0 +1,12 @@
+import * as React from 'react'
+import type { SVGProps } from 'react'
+const SvgQuestion = (props: SVGProps<SVGSVGElement>) => (
+  <svg fill='none' viewBox='0 0 24 24' width='1em' height='1em' {...props}>
+    <rect width={24} height={24} fill='#333' rx={12} />
+    <path
+      fill='#fff'
+      d='M11.135 13.787h1.476l.957 1.237c.65-.622 1.046-1.626 1.053-2.973-.007-2.406-1.271-3.712-2.967-3.705-1.709-.007-2.973 1.299-2.98 3.705.007 2.406 1.271 3.712 2.98 3.705q.47.002.889-.13zm-3.951-1.736c0-3.165 1.893-5.086 4.47-5.086 2.557 0 4.457 1.92 4.457 5.086 0 1.825-.629 3.233-1.654 4.101l1.34 1.737h-1.545l-.834-1.094a4.5 4.5 0 0 1-1.764.342c-2.577 0-4.47-1.928-4.47-5.086'
+    />
+  </svg>
+)
+export default SvgQuestion

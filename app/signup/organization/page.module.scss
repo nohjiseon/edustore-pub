@@ -1,0 +1,203 @@
+.wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 13.75rem;
+}
+
+.title_wrap {
+  text-align: center;
+  margin-bottom: 5rem;
+
+  & .title {
+    font-size: 1.75rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--color-neutral-black-1);
+  }
+}
+
+.personal_form {
+  width: 100%;
+  max-width: 35rem;
+  min-width: 35rem;
+
+  .input_group {
+    position: relative;
+    width: 100%;
+    margin-bottom: 1.875rem;
+  }
+
+  .input_title {
+    display: block;
+    margin-bottom: 0.75rem;
+    font-size: 1rem;
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-neutral-black-1);
+  }
+
+  .input_wrap {
+    position: relative;
+    height: 3.25rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    & span {
+      margin: 0 0.625rem;
+      font-size: 1rem;
+      font-weight: 300;
+      color: var(--color-neutral-l-grey-3);
+    }
+
+    input + svg {
+      width: 1.25rem;
+      height: 1.25rem;
+      position: absolute;
+      top: 50%;
+      right: 1.375rem;
+      transform: translateY(-50%);
+      cursor: pointer;
+      color: red;
+      color: var(--color-neutral-grey-3);
+    }
+  }
+
+  .input_name {
+    width: 100%;
+    border: 0.0625rem solid var(--color-neutral-l-grey-2);
+    border-radius: 0.75rem;
+    font-size: 1rem;
+    font-weight: 300;
+    color: var(--color-neutral-black-1);
+    padding: 1rem 1.375rem;
+
+    &:focus:not(:read-only) {
+      border: 0.0625rem solid var(--color-primary);
+    }
+
+    &.error {
+      border: 0.0625rem solid var(--color-action-error);
+    }
+
+    &.error:focus {
+      border: 0.0625rem solid var(--color-action-error);
+    }
+
+    &:disabled {
+      background: var(--color-neutral-back);
+    }
+
+    & + button {
+      width: 8.3125rem;
+      height: 100%;
+      border: 0.0625rem solid var(--color-neutral-l-grey-2);
+      border-radius: 0.75rem;
+      margin-left: 0.625rem;
+      flex-shrink: 0;
+      font-size: 1rem;
+      font-weight: var(--font-weight-medium);
+      color: var(--color-neutral-grey-3);
+
+      &.addr_btn {
+        color: var(--color-neutral-black-2);
+      }
+
+      &.input_check {
+        color: var(--color-action-success);
+        border: 0.0625rem solid var(--color-action-success);
+        font-weight: var(--font-weight-medium);
+
+        &:not(:disabled) {
+          color: var(--color-primary);
+        }
+
+        &:disabled {
+          color: var(--color-neutral-grey-3);
+          border: 0.0625rem solid var(--color-neutral-l-grey-2);
+        }
+      }
+    }
+
+    & + svg {
+      width: 1.25rem;
+      height: 1.25rem;
+      position: absolute;
+      top: 50%;
+      right: 1.375rem;
+      transform: translateY(-50%);
+      cursor: pointer;
+    }
+  }
+
+  .input_desc_wrap {
+    margin-top: 0.625rem;
+  }
+
+  .button_wrap {
+    padding-top: 1.875rem;
+  }
+
+  .input_sub_wrap {
+    position: relative;
+    margin-top: 0.75rem;
+
+    & span {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 300;
+      color: var(--color-neutral-grey-2);
+      margin-top: 0.625rem;
+
+      &.error {
+        color: var(--color-action-error);
+      }
+    }
+
+    & input + svg {
+      position: absolute;
+      bottom: 0rem;
+      right: 1.375rem;
+      // transform: translateY(-13px);
+      color: var(--color-action-success);
+    }
+
+    & button {
+      font-size: 1rem;
+      font-weight: var(--font-weight-medium);
+      line-height: 145%;
+      border-radius: 0.75rem;
+      height: 3.25rem;
+    }
+
+    & button:disabled {
+      border: 0.0625rem solid var(--color-neutral-l-grey-2);
+      background-color: var(--color-neutral-back) !important;
+      color: var(--color-neutral-grey-3);
+    }
+  }
+}
+
+.input_sub_wrap,
+.input_desc_wrap {
+  & span {
+    font-size: 0.875rem;
+    font-weight: 300;
+    color: var(--color-neutral-grey-2);
+  }
+
+  & span.warn {
+    color: var(--color-action-error);
+    display: block;
+  }
+
+  & span.error {
+    color: var(--color-action-error);
+  }
+
+  & span.success {
+    color: var(--color-primary);
+    display: block;
+  }
+}

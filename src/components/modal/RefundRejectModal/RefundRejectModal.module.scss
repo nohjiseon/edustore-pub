@@ -1,0 +1,86 @@
+// LoginModal 스타일
+.modal_content {
+  max-width: 39.75rem;
+  background: var(--color-neutral-white);
+  border-radius: 1.5rem;
+  padding: 2.5rem;
+}
+
+.modal_body {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal_title_wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 3rem;
+
+  & h2 {
+    font-size: 1.375rem;
+    font-weight: var(--font-weight-bold);
+    line-height: 100%;
+    color: var(--color-neutral-black-1);
+  }
+}
+
+.reject_wrap {
+  border-radius: 0.75rem;
+  border: 1px solid var(--color-neutral-l-grey-1);
+  margin-bottom: 1.25rem;
+  padding: 1.5rem 1.25rem;
+
+  & span {
+    display: block;
+    font-size: 1.25rem;
+    font-weight: var(--font-weight-semibold);
+    line-height: 125%;
+    color: var(--color-neutral-black-1);
+    margin-bottom: 2rem;
+  }
+
+  & p {
+    font-size: 1.125rem;
+    font-weight: var(--font-weight-regular);
+    line-height: 125%;
+    color: var(--color-neutral-black-1);
+  }
+}
+
+.reject_desc_wrap {
+  padding: 1.25rem 0;
+  margin-bottom: 3.125rem;
+
+  & p {
+    font-size: 1.125rem;
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-normal);
+    color: var(--color-neutral-black-2);
+    letter-spacing: -0.032rem;
+  }
+}
+
+.modal_button_wrap {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.9375rem;
+}
+
+.link_wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.63rem;
+
+  & a {
+    font-size: 1rem;
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-normal);
+    color: var(--color-neutral-grey-3);
+    text-decoration: underline;
+  }
+}

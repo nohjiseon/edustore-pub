@@ -1,0 +1,41 @@
+@use '@/styles/mixin.scss' as *;
+
+.review_list {
+  display: flex;
+  align-items: stretch;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  padding-top: 5rem;
+
+  li {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-neutral-white);
+    padding: 2.5rem 2rem 1.5rem;
+    border-radius: 1.5rem;
+    width: calc(25% - 0.9375rem);
+
+    strong {
+      display: block;
+      padding-block: 6.25rem 1.75rem;
+      font-size: 1.375rem;
+      font-weight: var(--font-weight-semibold);
+    }
+
+    p {
+      color: var(--color-neutral-grey-2);
+      font-size: 1.125rem;
+    }
+
+    .img_rotate {
+      transform: rotate(-90deg);
+    }
+  }
+}
+@include breakpoint_down(md) {
+  .review_list {
+    li {
+      width: calc(50% - 0.75rem);
+    }
+  }
+}

@@ -1,0 +1,142 @@
+.modal_content {
+  max-width: 40.625rem;
+  background: var(--color-neutral-white);
+  padding: 2.5rem;
+  border-radius: 1.5rem;
+}
+
+.modal_title_wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 0.5625rem;
+
+  & h2 {
+    font-size: 1.375rem;
+    font-weight: var(--font-weight-semibold);
+  }
+}
+
+.inp_tit {
+  display: block;
+  font-size: 1.125rem;
+  font-weight: var(--font-weight-medium);
+  padding-bottom: 1.25rem;
+
+  &.inp_tit ~ .inp_tit {
+    padding-top: 3rem;
+  }
+}
+.input_box {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  input {
+    width: 100%;
+    height: 3.5rem;
+    padding: 0 3.125rem 0 1.5rem;
+    border: 1px solid #c9d0da;
+    border-radius: 0.75rem;
+    text-align: end;
+    font-weight: var(--font-weight-medium);
+    font-size: 1.125rem;
+
+    &:read-only {
+      background-color: var(--color-neutral-back);
+
+      &:focus {
+        outline: none;
+      }
+    }
+    &::placeholder {
+      font-size: 1.125rem;
+      color: var(--color-neutral-grey-3);
+      font-weight: var(--font-weight-regular);
+    }
+  }
+  .unit {
+    position: absolute;
+    right: 1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.125rem;
+    color: var(--color-neutral-grey-3);
+  }
+}
+
+.error_txt {
+  padding-top: 0.625rem;
+  color: #e53835;
+  font-size: 0.875rem;
+  font-weight: 300;
+}
+
+.account_select_wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  .dropdown {
+    width: 100%;
+
+    > button {
+      background-color: var(--color-neutral-back);
+    }
+  }
+
+  .account_inp,
+  .holder_inp {
+    background-color: var(--color-neutral-back);
+    border: 1px solid #c9d0da;
+    border-radius: 0.75rem;
+    height: 3.125rem;
+    color: var(--color-neutral-grey-2);
+
+    ::placeholder {
+      font-size: 1.125rem;
+      color: #727983;
+    }
+  }
+  .account_inp {
+    width: 100%;
+    padding-left: 1.5rem;
+  }
+  .holder_inp {
+    width: 10.375rem;
+    text-align: center;
+  }
+}
+
+.info_list {
+  padding-block: 1.25rem 3rem;
+  li {
+    position: relative;
+    padding-left: 1.5rem;
+    color: #727983;
+    font-size: 1rem;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0.625rem;
+      top: 0.625rem;
+      width: 0.1875rem;
+      height: 0.1875rem;
+      border-radius: 100%;
+      background-color: #727983;
+    }
+  }
+}
+
+.button_wrap {
+  display: flex;
+  gap: 0.625rem;
+  align-items: center;
+  justify-content: center;
+
+  button {
+    max-width: 12.1875rem;
+  }
+}

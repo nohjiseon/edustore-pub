@@ -1,0 +1,121 @@
+.wrapper {
+  width: 100%;
+  margin-top: 13.75rem;
+  max-width: 75rem;
+  padding-inline: 1.25rem;
+  padding-bottom: 7.5rem;
+}
+
+/* Title Section */
+.title_wrap {
+  text-align: center;
+  margin-bottom: 5rem;
+
+  .title {
+    font-size: 2.8125rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--color-neutral-black-1);
+    margin-bottom: 1rem;
+  }
+
+  .description {
+    font-size: 1.125rem;
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-tight);
+    color: var(--color-neutral-grey-3);
+  }
+}
+
+/* Form */
+.form_wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.form_group {
+  .label {
+    display: flex;
+    align-items: flex-start;
+    padding-bottom: 1.25rem;
+    font-size: 1.25rem;
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-neutral-black-1);
+
+    .required {
+      margin-top: -0.125rem;
+    }
+  }
+
+  .title_input {
+    min-height: 1.25rem;
+  }
+
+  .error_message {
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--color-action-error);
+  }
+
+  .input {
+    width: 100%;
+    height: 3.75rem;
+    padding: 0 1.5rem;
+    font-size: 1rem;
+    color: var(--color-neutral-black-1);
+    background-color: var(--color-neutral-white);
+    border: 1px solid var(--color-neutral-l-grey-2);
+    border-radius: 0.75rem;
+    transition: border-color 0.2s;
+
+    &:focus {
+      outline: none;
+      border-color: var(--color-primary);
+    }
+
+    &::placeholder {
+      color: var(--color-neutral-grey-2);
+    }
+  }
+
+  .textarea {
+    width: 100%;
+    min-height: 25rem;
+    padding: 1.5rem;
+    font-size: 1rem;
+    font-family: 'Pretendard', sans-serif;
+    line-height: 1.6;
+    color: var(--color-neutral-black-1);
+    background-color: var(--color-neutral-white);
+    border: 1px solid var(--color-neutral-l-grey-2);
+    border-radius: 0.75rem;
+    resize: vertical;
+    transition: border-color 0.2s;
+
+    &:focus {
+      outline: none;
+      border-color: var(--color-primary);
+    }
+
+    &::placeholder {
+      color: var(--color-neutral-grey-2);
+      white-space: pre-line;
+    }
+  }
+}
+
+/* Category Tags */
+.tag_wrap {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+/* Button Section */
+.btn_wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  margin-top: 7.5rem;
+}

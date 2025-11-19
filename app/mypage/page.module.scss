@@ -1,0 +1,40 @@
+.wrapper {
+  width: 100%;
+  max-width: 50rem;
+  min-width: 50rem;
+  height: 100%;
+  margin-top: 15rem;
+}
+.title_wrap {
+  margin-bottom: 6.25rem;
+  text-align: center;
+  .title {
+    font-weight: var(--font-weight-bold);
+    font-size: 1.75rem;
+    line-height: 2.125rem;
+    color: var(--color-neutral-black-1);
+  }
+  .descirption {
+    margin-top: 1rem;
+    font-size: 1.125rem;
+    line-height: 1.5rem;
+    color: var(--color-neutral-grey-3);
+  }
+}
+.form_box {
+  background-color: var(--color-neutral-back);
+  border-radius: 1.5rem;
+  padding: 1.875rem 3.75rem;
+  label {
+    display: block;
+    font-size: 1rem;
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-neutral-black-1);
+    margin-bottom: 0.75rem;
+  }
+}
+.btn_wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 3.75rem;
+}

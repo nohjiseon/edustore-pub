@@ -1,0 +1,46 @@
+// LoginModal 스타일
+.modal_content {
+  width: 31.625rem;
+  background: var(--color-neutral-white);
+  border-radius: 1.5rem;
+  padding: 2.5rem;
+}
+
+.modal_body {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal_title_wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 0.63rem;
+  margin-bottom: 3rem;
+
+  & h2 {
+    font-size: 1.75rem;
+    font-weight: var(--font-weight-bold);
+    line-height: 100%;
+    color: var(--color-neutral-black-1);
+  }
+
+  & p {
+    font-size: 1.125rem;
+    font-weight: var(--font-weight-regular);
+    line-height: 135%;
+    color: var(--color-neutral-grey-2);
+  }
+}
+
+.modal_button_wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.63rem;
+
+  & button {
+    height: 3.76rem;
+  }
+}

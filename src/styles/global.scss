@@ -1,0 +1,341 @@
+@use 'sass:map';
+@use './mixin.scss' as *;
+
+// =============================
+// Typography maps (headlines, bodies only)
+// =============================
+$type-headlines: (
+  1: (
+    size: 2.8125rem,
+    weight: var(--font-weight-bold),
+    line-height: var(--line-height-normal),
+    family: var(--font-family-primary)
+  ),
+  2: (
+    size: 2rem,
+    weight: var(--font-weight-bold),
+    line-height: var(--line-height-normal),
+    family: var(--font-family-primary)
+  ),
+  3: (
+    size: 1.5rem,
+    weight: var(--font-weight-semibold),
+    line-height: var(--line-height-normal),
+    family: var(--font-family-primary)
+  ),
+  4: (
+    size: 1.375rem,
+    weight: var(--font-weight-semibold),
+    line-height: var(--line-height-normal),
+    family: var(--font-family-primary)
+  )
+);
+
+$type-bodies: (
+  1: (
+    regular: (
+      size: 1.25rem,
+      weight: var(--font-weight-regular),
+      line-height: var(--line-height-tight),
+      family: var(--font-family-primary)
+    ),
+    medium: (
+      size: 1.125rem,
+      weight: var(--font-weight-medium),
+      line-height: 1.75rem,
+      family: var(--font-family-primary)
+    )
+  ),
+  2: (
+    regular: (
+      size: 1.125rem,
+      weight: var(--font-weight-regular),
+      line-height: var(--line-height-tight),
+      family: var(--font-family-primary)
+    ),
+    medium: (
+      size: 1rem,
+      weight: var(--font-weight-medium),
+      line-height: 1.5rem,
+      family: var(--font-family-primary)
+    )
+  ),
+  3: (
+    regular: (
+      size: 1rem,
+      weight: var(--font-weight-regular),
+      line-height: var(--line-height-tight),
+      family: var(--font-family-primary)
+    ),
+    medium: (
+      size: 0.875rem,
+      weight: var(--font-weight-medium),
+      line-height: 1.25rem,
+      family: var(--font-family-primary)
+    )
+  ),
+  4: (
+    regular: (
+      size: 0.9375rem,
+      weight: var(--font-weight-regular),
+      line-height: var(--line-height-tight),
+      family: var(--font-family-primary)
+    ),
+    medium: (
+      size: 0.75rem,
+      weight: var(--font-weight-medium),
+      line-height: 1rem,
+      family: var(--font-family-primary)
+    )
+  )
+);
+
+// =============================
+// Generators
+// =============================
+@mixin define-headlines() {
+  @each $level, $props in $type-headlines {
+    --text-headline-#{$level}-size: #{map.get($props, size)};
+    --text-headline-#{$level}-weight: #{map.get($props, weight)};
+    --text-headline-#{$level}-line-height: #{map.get($props, line-height)};
+    --text-headline-#{$level}-family: #{map.get($props, family)};
+  }
+}
+
+@mixin define-bodies() {
+  @each $scale, $weights in $type-bodies {
+    @each $weight, $props in $weights {
+      --text-body-#{$scale}-#{$weight}-size: #{map.get($props, size)};
+      --text-body-#{$scale}-#{$weight}-weight: #{map.get($props, weight)};
+      --text-body-#{$scale}-#{$weight}-line-height: #{map.get(
+          $props,
+          line-height
+        )};
+      --text-body-#{$scale}-#{$weight}-family: #{map.get($props, family)};
+    }
+  }
+}
+
+// =============================
+// Base variable group mixins (no-arg)
+// =============================
+@mixin fontWeights {
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+}
+
+@mixin letterSpacing {
+  --letter-spacing-normal: -0.02em; /* -2% */
+  --letter-spacing-numbers: -0.01em; /* -1% for numbers */
+}
+
+@mixin lineHeights {
+  --line-height-tight: 130%;
+  --line-height-normal: 140%;
+  --line-height-relaxed: 150%;
+}
+
+@mixin shadows {
+  /* Base Shadow Colors */
+  --shadow-color-medium: rgba(171, 190, 209, 0.3);
+
+  /* Elevation Shadows - 고도별 그림자 */
+  --shadow-sm: 0 0.125rem 0.25rem 0 var(--shadow-color-medium);
+  --shadow-md: 0 0.25rem 0.625rem 0.75rem var(--shadow-color-medium);
+  --shadow-lg: 0 0.375rem 0.75rem 0 var(--shadow-color-medium);
+  --shadow-xl: 0 0.5rem 1rem 0 var(--shadow-color-medium);
+  --shadow-2xl: 0 1rem 2rem 0 var(--shadow-color-medium);
+}
+
+@mixin colors {
+  /* Legacy Colors (기존 컬러 유지) */
+  --white: #fff;
+  --black: #121212;
+  --black-02: #161616;
+  --black-sub: #808080;
+  --orange: #f3871f;
+
+  --highlight: var(--orange);
+
+  --bg-black: #282828;
+  --bg-gray: #f8f8fa;
+
+  --line-gray: #d6d6d6;
+
+  /* ======================================= */
+  /* Design System Colors (Figma Foundation) */
+  /* ======================================= */
+
+  /* Primary Colors */
+  --color-primary: #11c5d4;
+  --color-primary-secondary: #0d81e4;
+  --color-primary-etc-1: #87dfd6;
+  --color-primary-etc-2: #4fe6af;
+  --color-primary-etc-3: #0c4f8f;
+
+  --color-primary-tint-1: #ecf7fb;
+  --color-primary-tint-2: #cff3f6;
+
+  --color-primary-shade: #0e9eaa;
+
+  --color-primary-gradient: linear-gradient(
+    302deg,
+    #08afe6 12.37%,
+    #11d4bd 87.27%
+  );
+
+  /* Neutral Colors - Black Scale */
+  --color-neutral-black-1: #1e2022;
+  --color-neutral-black-2: #333333;
+  --color-neutral-white: #ffffff;
+
+  /* Neutral Colors - Grey Scale */
+  --color-neutral-grey-1: #53585e;
+  --color-neutral-grey-2: #727983;
+  --color-neutral-grey-3: #8f99a4;
+
+  /* Neutral Colors - Light Grey Scale */
+  --color-neutral-l-grey-1: #c9d0da;
+  --color-neutral-l-grey-2: #dae1e7;
+
+  /* Neutral Colors - Background Grey Scale */
+  --color-neutral-b-grey-1: #f5f7fa;
+  --color-neutral-b-grey-2: #f5f8ff;
+  --color-neutral-back: #f5f6f8;
+
+  /* Action Colors */
+  --color-action-success: #11c5d4;
+  --color-action-warning: #fbc02d;
+  --color-action-error: #e53835;
+
+  /* ======================================= */
+  /* Semantic Color Tokens */
+  /* ======================================= */
+
+  /* Background */
+  --bg-primary: var(--color-neutral-white);
+  --bg-secondary: var(--color-neutral-b-grey-1);
+  --bg-tertiary: var(--color-neutral-b-grey-2);
+
+  /* Text */
+  --text-primary: var(--color-neutral-black-1);
+  --text-secondary: var(--color-neutral-grey-1);
+  --text-tertiary: var(--color-neutral-grey-2);
+  --text-quaternary: var(--color-neutral-grey-3);
+  --text-inverse: var(--color-neutral-white);
+
+  /* Border */
+  --border-primary: var(--color-neutral-l-grey-1);
+  --border-secondary: var(--color-neutral-l-grey-2);
+
+  /* Interactive */
+  --interactive-primary: var(--color-primary);
+  --interactive-secondary: var(--color-primary-secondary);
+  --interactive-hover: var(--color-primary-etc-1);
+  --interactive-active: var(--color-primary-etc-3);
+
+  /* Status */
+  --status-success: var(--color-action-success);
+  --status-warning: var(--color-action-warning);
+  --status-error: var(--color-action-error);
+
+  /* Layout Specific */
+  --header-bg: #fdfdff;
+}
+
+:root {
+  @include colors;
+  @include fontWeights;
+  @include letterSpacing;
+  @include lineHeights;
+  @include shadows;
+
+  /* Typography tokens generated from maps */
+  @include define-headlines();
+  @include define-bodies();
+
+  /* Font Families */
+  --font-family-primary: var(--font-pretendard, 'Pretendard'), sans-serif;
+
+  /* Legacy Typography (기존 호환성) */
+  --kor: var(--font-family-primary);
+  --eng: var(--font-family-secondary);
+}
+
+.dark {
+  /* 다크모드 개발 시 여기서 색상 override */
+}
+
+::selection {
+  background-color: var(--color-primary);
+  color: var(--white);
+}
+
+// macOS 스타일 스크롤바 토큰을 전역으로 적용
+html,
+body {
+  * {
+    ::-webkit-scrollbar {
+      width: 1.5rem;
+      height: 0.5rem;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background-color: #c9d0da;
+      border-radius: 62.4375rem;
+      border: 0.5rem solid transparent;
+      background-clip: padding-box;
+      transition: background-color 0.2s ease;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background-color: #b5becb;
+    }
+  }
+}
+
+// 공통 input
+input {
+  &::placeholder {
+    color: var(--color-neutral-grey-3);
+  }
+}
+
+/* --- TEXT --- */
+
+// 경고 문구 또는 문장 중 하나의 정보 강조의 경우 사용
+strong {
+  font-weight: 500;
+}
+
+// 특정 정보 하이라이트
+em {
+  color: var(--color-primary);
+}
+
+.stroke {
+  color: transparent;
+  -webkit-text-stroke: 0.0625rem var(--color-primary);
+}
+
+#storybook-root {
+  display: flex !important;
+}
+
+@include breakpoint_up() {
+  .mo {
+    display: none !important;
+  }
+}
+
+@include breakpoint_down() {
+  .pc {
+    display: none !important;
+  }
+}

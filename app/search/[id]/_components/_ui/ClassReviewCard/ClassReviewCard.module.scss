@@ -1,0 +1,53 @@
+.card {
+  background: #ffffff;
+  border-radius: 0.75rem;
+  padding: 0.9375rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.0625rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.content {
+  font-family: 'Pretendard', sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  color: #333333;
+  letter-spacing: -0.02rem;
+  line-height: 1.35;
+
+  // 2줄 말줄임 처리
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+}
+
+.nickname {
+  font-family: 'Pretendard', sans-serif;
+  font-size: 0.9375rem;
+  font-weight: 400;
+  color: #333333;
+  letter-spacing: -0.01875rem;
+  line-height: 1.35;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.divider {
+  width: 0.0625rem;
+  height: 0.625rem;
+  background-color: #dae1e7;
+  flex-shrink: 0;
+}

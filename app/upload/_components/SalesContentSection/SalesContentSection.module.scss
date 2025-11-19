@@ -1,0 +1,278 @@
+.sales_content_section {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  width: 100%;
+  margin-top: 3.75rem;
+}
+
+// Field Group
+.field_group {
+  width: 100%;
+  max-width: 92.5rem;
+}
+
+// Label
+.label {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.0625rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 125%;
+  letter-spacing: -0.025rem;
+  color: #1e2022;
+  padding-bottom: 1.25rem;
+}
+
+.error_message {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--color-action-error);
+}
+
+.info_button {
+  margin-left: 0.375rem;
+}
+.extension_tooltip {
+  padding: 1.75rem 2rem;
+
+  > button {
+    top: 1.75rem;
+    right: 2rem;
+    svg {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+  }
+
+  .extension_tit {
+    strong {
+      display: block;
+      font-size: 1.375rem;
+      color: var(--color-neutral-black-1);
+      font-weight: var(--font-weight-semibold);
+      padding-bottom: 0.5rem;
+    }
+    p {
+      font-size: 1rem;
+      padding-bottom: 2.5rem;
+      font-weight: var(--font-weight-regular);
+    }
+  }
+  .extension_list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+
+    .extension_box {
+      display: flex;
+
+      strong {
+        width: 6.125rem;
+        font-size: 1.125rem;
+        color: var(--color-neutral-black-1);
+        font-weight: var(--font-weight-medium);
+      }
+      .extension_item {
+        display: flex;
+        align-items: center;
+        gap: 0.375rem;
+        span {
+          display: inline-flex;
+          padding-inline: 0.375rem;
+          height: 1.6875rem;
+          background-color: #ecf7fb;
+          border-radius: 0.3125rem;
+          color: var(--color-neutral-black-2);
+          font-weight: var(--font-weight-regular);
+        }
+      }
+    }
+  }
+}
+
+.required {
+  line-height: 100%;
+  color: #1e2022;
+}
+
+// Textarea Styles
+.title_input_wrap {
+  position: relative;
+  > div {
+    padding: 0 !important;
+  }
+}
+.title_input {
+  min-height: 3.25rem;
+  padding: 0.875rem 1.25rem;
+  height: 3.25rem;
+  box-sizing: border-box;
+
+  + p {
+    position: absolute;
+    right: 1.25rem;
+    bottom: 50%;
+    transform: translateY(50%);
+  }
+}
+
+.content_textarea {
+  min-height: 33.9375rem;
+  resize: vertical;
+}
+
+.summary_textarea {
+  min-height: 9.25rem;
+}
+
+// Error Message
+.error_message {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 135%;
+  letter-spacing: -0.0175rem;
+  color: #e53835;
+  font-weight: 400;
+}
+
+// Upload Container - Thumbnail
+.upload_container_thumbnail {
+  width: 17.5rem;
+  height: 15rem;
+  border: 1px dashed #c9d0da;
+  border-radius: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: all 0.2s ease;
+
+  &.dragging {
+    border-color: #2b4eff;
+    background-color: rgba(43, 78, 255, 0.05);
+  }
+  .upload_instruction {
+    text-align: center;
+  }
+  .upload_details {
+    align-items: center;
+  }
+}
+
+// Upload Container - File
+.upload_container_file {
+  width: 100%;
+  border: 1px dashed #c9d0da;
+  border-radius: 0.75rem;
+  padding: 3.75rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+
+  &.dragging {
+    border-color: #2b4eff;
+    background-color: rgba(43, 78, 255, 0.05);
+  }
+}
+
+// Upload Box
+.upload_box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  cursor: pointer;
+}
+
+.upload_info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+}
+
+.upload_instruction {
+  font-size: 1.125rem;
+  font-weight: 500;
+  line-height: 135%;
+  letter-spacing: -0.0225rem;
+  color: #333333;
+  margin: 0;
+}
+
+.file_select {
+  color: #2b4eff;
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+  text-underline-position: from-font;
+  cursor: pointer;
+}
+
+.upload_details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3125rem;
+  font-size: 0.875rem;
+  line-height: 0.875rem;
+  letter-spacing: -0.0175rem;
+  color: #8f99a4;
+  text-align: start;
+
+  p {
+    margin: 0;
+  }
+}
+
+// Uploaded Files List
+.uploaded_files_list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  width: 100%;
+  margin-top: 0.75rem;
+}
+
+// Thumbnail Preview
+.thumbnail_preview_container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.thumbnail_preview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0.75rem;
+}
+
+.thumbnail_remove_button {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.6);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+
+  &:focus {
+    outline: 2px solid #2b4eff;
+    outline-offset: 2px;
+  }
+}

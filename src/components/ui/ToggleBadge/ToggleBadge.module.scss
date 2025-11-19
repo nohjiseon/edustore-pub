@@ -1,0 +1,40 @@
+@use '@/styles/mixin.scss' as *;
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  border-radius: 6.25rem;
+  height: fit-content;
+  border: 0.0625rem solid var(--color-neutral-l-grey-2);
+  color: var(--color-neutral-grey-1);
+  transition: all 0.2s ease;
+  cursor: pointer;
+
+  &.sm {
+    font-size: 0.875rem;
+    font-weight: 400;
+    padding: 0.5625rem 0.8125rem;
+  }
+
+  &.md {
+    @include text(3, regular);
+    line-height: 125%;
+    padding: 0.75rem 1rem;
+    letter-spacing: -0.02rem;
+  }
+
+  &.selected {
+    background-color: var(--color-primary-tint-1);
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+    font-weight: var(--font-weight-medium);
+  }
+
+  &.disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+    border: 1px solid var(--color-neutral-l-grey-2);
+    color: var(--color-neutral-grey-3);
+    background-color: var(--color-neutral-back);
+  }
+}

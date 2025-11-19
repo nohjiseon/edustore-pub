@@ -1,0 +1,211 @@
+.wrap {
+  width: 100%;
+  max-width: 92.5rem;
+  margin-top: 16rem;
+  padding-inline: 1.25rem;
+}
+
+.title_wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6.25rem;
+
+  & h1 {
+    font-size: 4.375rem;
+    font-weight: var(--font-weight-medium);
+    line-height: 100%;
+    color: var(--color-neutral-grey-1);
+  }
+
+  .title_date {
+    height: 4.375rem;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    flex-direction: column;
+    gap: 0.3125rem;
+
+    & span {
+      font-size: 1.125rem;
+      font-weight: var(--font-weight-regular);
+      line-height: 110%;
+      color: var(--color-neutral-grey-2);
+    }
+  }
+
+  .policy_history_wrap {
+    width: 18.125rem;
+
+    & > div {
+      width: 18.125rem !important;
+
+      button {
+        width: 100% !important;
+      }
+    }
+
+    & p {
+      width: 12.75rem !important;
+      font-size: 1.125rem;
+      font-weight: var(--font-weight-regular);
+      line-height: 110%;
+      color: var(--color-neutral-grey-2);
+    }
+  }
+}
+
+.policy_info_wrap {
+  width: 100%;
+  border-top: 1px solid var(--color-neutral-grey-3);
+  padding-top: 0.625rem;
+
+  & .list_wrap {
+    margin-top: 1.25rem;
+
+    & .info_title_wrap {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--color-neutral-grey-3);
+      padding-bottom: 1.875rem;
+      margin-bottom: 3.125rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+
+      &:hover {
+        opacity: 0.7;
+      }
+
+      & span {
+        font-size: 1.375rem;
+        font-weight: var(--font-weight-medium);
+        line-height: var(--line-height-normal);
+        color: var(--color-neutral-black-2);
+      }
+    }
+
+    .arrow {
+      transition: transform 0.3s ease;
+
+      &.rotated {
+        transform: rotate(180deg);
+      }
+    }
+
+    & .info_desc_wrap {
+      overflow: hidden;
+      transition: all 0.3s ease-out;
+
+      &.open {
+        max-height: 312.5rem;
+        opacity: 1;
+        padding-bottom: 4.375rem;
+      }
+
+      &.closed {
+        height: 0;
+        opacity: 0;
+        padding-bottom: 0;
+      }
+
+      & p {
+        font-size: 1.25rem;
+        font-weight: var(--font-weight-regular);
+        line-height: var(--line-height-normal);
+        color: var(--color-neutral-grey-1);
+
+        span {
+          display: block;
+          padding-left: 1.5em;
+          text-indent: -1.5em;
+          margin: 0;
+          margin-top: 1.25rem;
+
+          &.indent {
+            text-indent: 1.875rem;
+          }
+          &.indent_bar2 {
+            text-indent: -0.9375rem;
+            padding-left: 1.875rem;
+          }
+
+          &:first-of-type {
+            margin-top: 0;
+          }
+
+          &.red {
+            display: inline;
+            font-weight: var(--font-weight-bold);
+            color: #ff0000;
+            padding: 0;
+          }
+        }
+
+        // 콜론(:) 뒤 내용 스타일링
+        .content {
+          display: inline;
+          padding-left: 0;
+          text-indent: 0;
+        }
+      }
+    }
+  }
+}
+
+.summary_table {
+  width: 100%;
+  overflow-x: auto;
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 1.25rem;
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-normal);
+    color: var(--color-neutral-grey-1);
+    border-top: 1px solid var(--color-neutral-l-grey-2);
+    border-bottom: 1px solid var(--color-neutral-l-grey-2);
+
+    thead {
+      tr {
+        height: 3.3125rem;
+        background: var(--color-neutral-back);
+
+        th {
+          font-weight: var(--font-weight-regular);
+          border: 1px solid var(--color-neutral-l-grey-2);
+
+          &:first-child {
+            border-left: 0;
+            width: 12.5rem;
+          }
+
+          &:last-child {
+            border-right: 0;
+            width: 12.5rem;
+          }
+        }
+      }
+    }
+
+    tbody {
+      tr {
+        td {
+          border: 1px solid var(--color-neutral-l-grey-2);
+          height: 3.3125rem;
+          text-align: center;
+
+          &:first-child {
+            background: var(--color-neutral-back);
+            border-left: 0;
+          }
+
+          &:last-child {
+            border-right: 0;
+          }
+        }
+      }
+    }
+  }
+}

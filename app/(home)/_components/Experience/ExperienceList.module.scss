@@ -1,0 +1,63 @@
+.experience_slide {
+  position: relative;
+  padding-top: 5rem;
+
+  img {
+    width: auto;
+  }
+  .beige,
+  .darkblue,
+  .green,
+  .yellow,
+  .turquoise,
+  .blue,
+  .img_ver {
+    width: 17.6875rem;
+    overflow: hidden;
+    border-radius: 1.5rem;
+  }
+  .beige,
+  .darkblue,
+  .green,
+  .yellow,
+  .turquoise,
+  .blue {
+    padding: 1.5rem 1.75rem;
+    font-size: 1.625rem;
+    font-weight: var(--font-weight-semibold);
+
+    &.yellow {
+      height: 18.0625rem;
+      background-color: #f6ecde;
+      color: #e3a041;
+    }
+    &.turquoise {
+      height: 24.1875rem;
+      background-color: #0ea9a9;
+      color: #bcfff2;
+    }
+    &.blue {
+      height: 20.5625rem;
+      background-color: #b2d7f0;
+      color: #0880d0;
+    }
+    &.green {
+      height: 20.5625rem;
+      background-color: #e8f6de;
+      color: #66a936;
+    }
+    &.darkblue {
+      height: 24.1875rem;
+      background-color: #387cca;
+      color: #cdebff;
+    }
+    &.beige {
+      height: 20.5625rem;
+      background-color: #f0e4b2;
+      color: #a7880a;
+    }
+    p {
+      padding-top: 2.5rem;
+    }
+  }
+}

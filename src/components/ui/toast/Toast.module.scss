@@ -1,0 +1,32 @@
+.toast_wrap {
+  position: fixed;
+  top: 1.875rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 0.5625rem;
+  padding: 0.625rem 1rem;
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.15);
+  background-color: var(--color-neutral-white);
+  transition: top 0.3s ease;
+
+  .icon_wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+    width: 1rem;
+    height: 1rem;
+    background-color: #87dfd6;
+    color: #fff;
+  }
+  p {
+    font-size: 0.875rem;
+    color: var(--color-neutral-black-2);
+  }
+
+  &.toast_scrolled {
+    top: 8.125rem;
+  }
+}

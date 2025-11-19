@@ -1,0 +1,51 @@
+import * as React from 'react'
+import type { SVGProps } from 'react'
+const SvgFilter = (props: SVGProps<SVGSVGElement>) => (
+  <svg fill='none' viewBox='0 0 24 24' width='1em' height='1em' {...props}>
+    <rect
+      width={4.706}
+      height={1.412}
+      x={4}
+      y={16.706}
+      fill='currentColor'
+      rx={0.706}
+    />
+    <path
+      fill='currentColor'
+      d='M11.53 17.412c0-.39.315-.706.705-.706h7.059a.706.706 0 1 1 0 1.412h-7.059a.706.706 0 0 1-.706-.706'
+    />
+    <rect
+      width={9.412}
+      height={1.412}
+      x={10.588}
+      y={11.294}
+      fill='currentColor'
+      rx={0.706}
+    />
+    <path
+      fill='currentColor'
+      d='M4 12c0-.39.316-.706.706-.706H8a.706.706 0 0 1 0 1.412H4.706A.706.706 0 0 1 4 12'
+    />
+    <path
+      fill='currentColor'
+      d='M8 10.118c.39 0 .706.316.706.705v2.353a.706.706 0 0 1-1.412 0v-2.353c0-.39.316-.706.706-.706'
+    />
+    <rect
+      width={8.471}
+      height={1.412}
+      x={4}
+      y={5.882}
+      fill='currentColor'
+      rx={0.706}
+    />
+    <path
+      fill='currentColor'
+      d='M15.294 6.588c0-.39.316-.706.706-.706h3.294a.706.706 0 1 1 0 1.412H16a.706.706 0 0 1-.706-.706'
+    />
+    <path
+      fill='currentColor'
+      d='M15.53 4.706c.39 0 .705.316.705.706v2.353a.706.706 0 0 1-1.411 0V5.412c0-.39.316-.706.706-.706M11.765 15.53c.39 0 .706.315.706.705v2.353a.706.706 0 0 1-1.412 0v-2.353c0-.39.316-.706.706-.706'
+    />
+  </svg>
+)
+export default SvgFilter

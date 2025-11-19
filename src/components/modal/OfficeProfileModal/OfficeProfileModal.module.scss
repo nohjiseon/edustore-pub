@@ -1,0 +1,127 @@
+.modal_content {
+  background-color: #fff;
+  border-radius: 1.5rem;
+  max-width: 40.625rem !important;
+
+  input {
+    height: 3.25rem;
+  }
+}
+.modal_title {
+  width: 100%;
+  text-align: center;
+  font-size: 1.375rem !important;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-neutral-black-1);
+}
+.modal_body {
+  margin-bottom: 2.5rem;
+}
+.modal_header {
+  button {
+    display: none;
+  }
+}
+.profile_wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
+
+  .file_input {
+    position: absolute;
+    width: 0;
+    height: 0;
+    opacity: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .profile_img {
+    position: relative;
+    width: 7.75rem;
+    height: 7.75rem;
+    border: 2px solid var(--color-primary);
+    border-radius: 100%;
+    cursor: pointer;
+
+    img {
+      object-fit: cover;
+      height: 100%;
+      border-radius: 100%;
+    }
+    .ic_edit {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 100%;
+      background-color: var(--color-primary);
+      color: var(--color-neutral-white);
+    }
+  }
+}
+
+.label {
+  display: block;
+  font-size: 1rem;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-neutral-black-1);
+  padding-block: 3rem 1rem;
+}
+
+.input_group {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.625rem;
+  margin-bottom: 0;
+
+  > :first-child {
+    flex: 1;
+  }
+}
+.duplication_btn {
+  position: absolute;
+  right: 0;
+  top: 0.5rem;
+  width: 6.875rem;
+  height: 2.25rem;
+  font-size: 0.9375rem;
+  font-weight: 400;
+  color: var(--color-neutral-grey-3);
+  transition: background-color 0.2s ease, border-color 0.2s ease,
+    color 0.2s ease;
+
+  &.success {
+    color: var(--color-primary);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+.duplication_desc {
+  font-size: 0.875rem;
+  color: var(--color-neutral-grey-2);
+  margin: 0;
+  margin-top: 0.625rem;
+}
+
+.success_message {
+  font-size: 0.875rem;
+  font-weight: 300;
+  letter-spacing: -0.02rem;
+  color: var(--color-primary);
+  margin: 0;
+  margin-top: 0.625rem;
+  margin-bottom: 0;
+}
+.modal_footer {
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+}

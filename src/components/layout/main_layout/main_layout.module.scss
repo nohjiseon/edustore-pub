@@ -1,0 +1,22 @@
+@use '@/styles/mixin.scss' as *;
+
+.main_layout_wrapper {
+  // display: flex;
+  // flex-direction: column;
+  // align-items: center;
+  // width: 100%;
+  position: relative;
+  min-height: 100svh;
+}
+
+.main_content_box {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  flex: 1;
+
+  // 공통 하단 여백
+  > div {
+    padding-bottom: 31.5rem;
+  }
+}

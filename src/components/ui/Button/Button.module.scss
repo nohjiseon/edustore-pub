@@ -1,0 +1,73 @@
+@use '@/styles/mixin.scss' as *;
+
+.container {
+  font-size: 1.25rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  border-radius: 6.25rem;
+  transition: all 200ms;
+  outline: none;
+  padding: 1.0625rem 0;
+
+  &:disabled {
+    pointer-events: none;
+    background-color: var(--color-neutral-l-grey-1) !important;
+    color: var(--color-neutral-grey-3) !important;
+    border-color: var(--color-neutral-l-grey-1) !important;
+    opacity: 1;
+  }
+
+  &:focus-visible {
+    box-shadow: var(--shadow-sm);
+  }
+
+  &[aria-invalid='true'] {
+    box-shadow: 0 0 0 0.1875rem rgba(var(--destructive), 0.2);
+    border-color: var(--destructive);
+  }
+
+  svg {
+    pointer-events: none;
+    flex-shrink: 0;
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  // Variants
+  &.default {
+    background-color: var(--color-primary);
+    color: var(--color-neutral-white);
+    border: none;
+
+    &:hover {
+      background-color: rgba(17, 197, 212, 0.9);
+    }
+  }
+
+  &.destructive {
+    background-color: var(--destructive);
+    color: white;
+    box-shadow: var(--shadow-xs);
+
+    &:hover {
+      background-color: rgba(var(--destructive), 0.9);
+    }
+
+    &:focus-visible {
+      box-shadow: 0 0 0 0.1875rem rgba(var(--destructive), 0.2);
+    }
+  }
+
+  &.outline {
+    border: 0.0625rem solid var(--color-neutral-l-grey-1);
+    background-color: var(--color-neutral-white);
+    color: var(--color-neutral-black-1);
+
+    &:hover {
+      background-color: rgba(201, 208, 218, 0.1);
+    }
+  }
+}

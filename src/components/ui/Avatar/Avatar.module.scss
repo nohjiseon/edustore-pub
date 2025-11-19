@@ -1,0 +1,19 @@
+.avatar_container {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.avatar_image {
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.avatar_name {
+  font-family: 'Pretendard', sans-serif;
+  font-size: 0.9375rem;
+  font-weight: 400;
+  color: var(--color-neutral-grey-1, #53585e);
+  line-height: normal;
+  letter-spacing: -0.3px;
+}

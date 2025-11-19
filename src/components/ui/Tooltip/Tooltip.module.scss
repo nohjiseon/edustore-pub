@@ -1,0 +1,33 @@
+.trigger {
+  position: relative;
+}
+.tooltip {
+  position: absolute;
+  z-index: 1;
+  padding: 0.875rem 1rem;
+  background-color: var(--color-neutral-white);
+  color: var(--color-neutral-grey-3);
+  border-radius: 1.25rem;
+  font-size: 0.875rem;
+  box-shadow: 0.125rem 0.1875rem 1.5rem 0 rgba(140, 163, 172, 0.28);
+  text-align: left;
+  height: fit-content;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 150ms ease, transform 150ms ease;
+}
+.tooltip.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.title {
+  font-weight: var(--font-weight-semibold);
+  padding-bottom: 0.625rem;
+  font-size: 0.875rem;
+  color: var(--color-neutral-black-1);
+}
+.close_btn {
+  position: absolute;
+  top: 0.875rem;
+  right: 1rem;
+}

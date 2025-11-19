@@ -1,0 +1,118 @@
+.input_wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  width: 100%;
+}
+
+.title {
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: -0.02rem;
+  color: var(--color-neutral-black-1);
+  line-height: 1.25;
+  margin: 0;
+  margin-bottom: 0.125rem;
+}
+
+.input_container {
+  position: relative;
+  width: 100%;
+}
+
+.input {
+  width: 100%;
+  height: 3.375rem;
+  padding: 0 1.38rem;
+  border: 1px solid var(--color-neutral-l-grey-2);
+  border-radius: 0.75rem;
+  background: var(--color-neutral-white);
+  font-family: 'Pretendard', sans-serif;
+  font-size: 1rem;
+  font-weight: 300;
+  letter-spacing: -0.02rem;
+  color: var(--color-neutral-black-1);
+  transition: border-color 0.2s ease;
+
+  &::placeholder {
+    color: var(--color-neutral-grey-3);
+  }
+
+  &:focus {
+    outline: none;
+    border-color: var(--color-primary);
+  }
+
+  &:disabled {
+    background-color: var(--color-neutral-back);
+    color: var(--color-neutral-grey-3);
+    cursor: not-allowed;
+  }
+
+  &:disabled::placeholder {
+    color: var(--color-neutral-grey-3);
+  }
+
+  &.error {
+    border-color: var(--color-action-error);
+  }
+
+  &.input_with_icon {
+    padding-right: 3.5rem;
+  }
+
+  &.input_with_both_icons {
+    padding-right: 5.5rem;
+  }
+}
+
+.check_icon {
+  position: absolute;
+  right: 1.375rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-primary);
+
+  &.check_icon_with_toggle {
+    right: 3.5rem;
+  }
+}
+
+.toggle_button {
+  position: absolute;
+  right: 1.375rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-neutral-grey-3);
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 0.7;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.message {
+  font-size: 0.875rem;
+  font-weight: 300;
+  letter-spacing: -0.02rem;
+  color: var(--color-neutral-grey-2);
+  margin: 0;
+}
+
+.error_message {
+  color: var(--color-action-error);
+}
