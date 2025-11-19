@@ -10,7 +10,7 @@ import { ModalRoot } from '@/components/common/modal_root'
 import { Dimmed } from '@/components/ui/Dimmed'
 import { useAuthInitializer } from '@/hooks/useAuthInitializer'
 import { useIndividualRouteGuard } from '@/hooks/useIndividualRouteGuard'
-import { useOrganizationRouteGuard } from '@/hooks/useOrganizationRouteGuard'
+// import { useOrganizationRouteGuard } from '@/hooks/useOrganizationRouteGuard'
 
 interface ProvidersProps {
   children: ReactNode
@@ -23,7 +23,7 @@ const Providers = ({ children }: ProvidersProps) => {
   useAuthInitializer()
 
   // 기관회원 라우트 가드 Hook 호출
-  useOrganizationRouteGuard()
+  // useOrganizationRouteGuard()
 
   // 개인회원 라우트 가드 Hook 호출
   useIndividualRouteGuard()

@@ -24,7 +24,7 @@ const EducationList = ({ className }: Props) => {
   const uniqueId = useId()
 
   const handleCardClick = (id: number) => {
-    router.push(`/content/${id}`)
+    router.push(`/search/${id}`)
   }
 
   return (

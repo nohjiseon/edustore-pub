@@ -1,7 +1,7 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useMemo } from 'react'
 
 import styles from './CartSummary.module.scss'
 import { EstimateModal } from '../EstimateModal'
@@ -9,52 +9,22 @@ import { ProposalModal } from '../ProposalModal'
 
 import { Button } from '@/components/ui'
 import { useModal } from '@/hooks/useModal'
-import { TokenStorage } from '@/lib/api'
-import { cartService } from '@/services/cart.service'
-import { useAuthStore } from '@/stores/auth'
 import { useCartStore } from '@/stores/cart'
-import type { CartView } from '@/types/cart'
 
 const CartSummary = () => {
   const router = useRouter()
-  const user = useAuthStore((state) => state.user)
-  const isAuthenticated = useAuthStore((state) => state.isAuthenticated)
+  const cartItems = useCartStore((state) => state.cartItems)
   const selectedIds = useCartStore((state) => state.selectedIds)
   const { openModal } = useModal()
-  const [cartItems, setCartItems] = useState<CartView[]>([])
-
-  // 장바구니 목록 조회
-  useEffect(() => {
-    if (!user || !isAuthenticated || user.memberType !== 'individual') {
-      return
-    }
-
-    const fetchCartItems = async () => {
-      try {
-        const token = TokenStorage.getAccessToken()
-        if (!token || !user.memNo) {
-          return
-        }
-
-        const response = await cartService.getCartItems(Number(user.memNo))
-        setCartItems(response.data)
-      } catch (error: any) {
-        console.error('장바구니 목록 조회 실패:', error)
-      }
-    }
-
-    fetchCartItems()
-  }, [user, isAuthenticated])
 
   // 선택된 아이템 요약 계산
   const selectedSummary = useMemo(() => {
-    // selectedIds는 productNo를 문자열로 저장하고 있음
     const selectedItems = cartItems.filter((item) =>
-      selectedIds.includes(String(item.productNo))
+      selectedIds.includes(item.id)
     )
     const totalCount = selectedItems.length
     const totalAmount = selectedItems.reduce(
-      (sum, item) => sum + (item.product.product.price || 0),
+      (sum, item) => sum + (item.price || 0),
       0
     )
 

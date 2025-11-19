@@ -224,7 +224,7 @@ const ReviewsPage = () => {
             {/* 리뷰 컨테이너 */}
             <div className={styles.review_container}>
               <Link
-                href={`/content/${review.id}`}
+                href={`/search/${review.id}`}
                 className={styles.review_link}
               >
                 {/* 좌측 별점 */}

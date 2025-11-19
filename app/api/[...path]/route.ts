@@ -6,11 +6,39 @@ import { NextRequest, NextResponse } from 'next/server'
 const BACKEND_URL = process.env.BACKEND_API_URL || 'http://52.78.34.73'
 // const BACKEND_URL = process.env.BACKEND_API_URL || 'http://127.0.0.1'
 
+// 더미 데이터 모드 확인
+const USE_MOCK_DATA = process.env.NEXT_PUBLIC_USE_MOCK_DATA === 'true'
+
 /**
  * API 프록시 핸들러
  * /api/* 요청을 백엔드로 전달하고 상세 로그 출력
+ * 더미 데이터 모드일 때는 실제 서버로 요청하지 않음
  */
 async function handleRequest(request: NextRequest, method: string) {
+  // 더미 데이터 모드일 때는 프록시를 통해 실제 서버로 요청하지 않음
+  // (클라이언트의 axios가 모크 핸들러를 사용하므로 여기서는 경고만 표시)
+  if (USE_MOCK_DATA) {
+    console.log('\n========================================')
+    console.log('⚠️  [MOCK MODE] 프록시 요청 차단')
+    console.log('========================================')
+    console.log('📍 Method:', method)
+    console.log('📍 Original URL:', request.nextUrl.pathname)
+    console.log('📍 Path:', request.nextUrl.pathname.replace('/api/', ''))
+    console.log('⚠️  더미 데이터 모드가 활성화되어 있습니다.')
+    console.log('📍 클라이언트의 axios가 모크 핸들러를 사용합니다.')
+    console.log('========================================\n')
+
+    return NextResponse.json(
+      {
+        error: 'MOCK_MODE_ACTIVE',
+        message:
+          '더미 데이터 모드가 활성화되어 있어 실제 서버로 요청하지 않습니다.',
+        path: request.nextUrl.pathname.replace('/api/', '')
+      },
+      { status: 200 } // 200으로 반환하여 클라이언트가 모크 핸들러를 사용하도록 함
+    )
+  }
+
   // URL 파싱
   const path = request.nextUrl.pathname.replace('/api/', '')
   const searchParams = request.nextUrl.searchParams.toString()

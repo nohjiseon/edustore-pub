@@ -6,7 +6,6 @@ import React, { useEffect, useState } from 'react'
 import styles from './OrderSummary.module.scss'
 import CartSuccessModal from '../CartSuccessModal/CartSuccessModal'
 
-import LoginModal from '@/components/modal/LoginModal'
 import { Button } from '@/components/ui'
 import Avatar from '@/components/ui/Avatar'
 import StarRating from '@/components/ui/StarRating'
@@ -14,11 +13,7 @@ import TagList, { Tag } from '@/components/ui/TagList/TagList'
 import { TAG_COLOR_MAP } from '@/constants/tag'
 import { useScrollDirection } from '@/hooks/use-scroll-direction'
 import { useModal } from '@/hooks/useModal'
-import { TokenStorage } from '@/lib/api'
-import type { AuthData } from '@/lib/api'
 import { cn } from '@/lib/utils'
-import { cartService } from '@/services/cart.service'
-import { useAuthStore } from '~/stores/auth'
 import { useCartStore } from '~/stores/cart'
 
 const DetailRow = ({ label, value }: { label: string; value: string }) => {
@@ -49,8 +44,6 @@ const OrderSummary = () => {
   const { openModal } = useModal()
   const addToCart = useCartStore((state) => state.addToCart)
   const scrollDirection = useScrollDirection({ threshold: 10 })
-  const user = useAuthStore((state) => state.user)
-  const isAuthenticated = useAuthStore((state) => state.isAuthenticated)
   const [isAdding, setIsAdding] = useState(false)
 
   // TODO: 나중에 비동기 데이터 fetching으로 교체 예정
@@ -96,107 +89,29 @@ const OrderSummary = () => {
   }
 
   const handleAddToCart = async () => {
-    // 비회원일 경우 로그인 모달 표시
-    if (!isAuthenticated) {
-      openModal(LoginModal)
-      return
-    }
-
-    // 개인회원만 장바구니 사용 가능
-    if (user?.memberType !== 'individual') {
-      alert('장바구니 기능은 개인회원만 사용할 수 있습니다.')
-      return
-    }
-
-    // memNo 확인
-    const memNo = user?.memNo ? Number(user.memNo) : null
-    if (!memNo || isNaN(memNo)) {
-      alert('회원 정보를 불러올 수 없습니다. 다시 로그인해주세요.')
-      return
-    }
-
-    // productNo 확인
-    const productNo = params?.id ? Number(params.id) : null
-    if (!productNo || isNaN(productNo)) {
-      alert('상품 정보를 불러올 수 없습니다.')
-      return
-    }
+    const productId =
+      typeof params?.id === 'string' ? params.id : data.id.toString()
 
     setIsAdding(true)
 
     try {
-      // 토큰 및 인증 상태 확인
-      const token = TokenStorage.getAccessToken()
-      const authData = TokenStorage.getAuthData()
-
-      console.log('=== 장바구니 추가 - 인증 상태 확인 ===')
-      console.log('로그인 상태:', isAuthenticated)
-      console.log('사용자 정보:', user)
-      console.log('회원 번호 (memNo):', memNo)
-      console.log(
-        'Access Token:',
-        token ? `${token.substring(0, 20)}...` : '없음'
-      )
-      console.log('인증 데이터:', authData ? '있음' : '없음')
-
-      if (authData) {
-        console.log('토큰 만료 시간:', authData.expireAt)
-        const expireTime = new Date(authData.expireAt).getTime()
-        const now = Date.now()
-        const isExpired = expireTime <= now
-        console.log('토큰 만료 여부:', isExpired ? '만료됨' : '유효함')
-        console.log(
-          '만료까지 남은 시간:',
-          isExpired ? '0초' : `${Math.floor((expireTime - now) / 1000)}초`
-        )
-      }
-
-      if (!token) {
-        alert('인증 토큰이 없습니다. 다시 로그인해주세요.')
-        setIsAdding(false)
-        return
-      }
-
-      console.log('장바구니 추가 API 호출 시작...')
-      console.log('요청 데이터:', {
-        memNo: memNo,
-        productNo: productNo
+      addToCart({
+        id: productId,
+        title: data.title,
+        author: {
+          name: data.authorName,
+          avatar: data.authorImage
+        },
+        price: data.price,
+        imageSrc: data.authorImage,
+        tags: convertedTags
       })
 
-      await cartService.addToCart({
-        memNo: memNo,
-        productNo: productNo
-      })
-
-      console.log('장바구니 추가 성공!')
-
-      // 성공 모달 표시
       openModal(CartSuccessModal, {
         onConfirm: () => {
           router.push('/cart')
         }
       })
-    } catch (error: any) {
-      console.error('장바구니 추가 실패:', error)
-      console.error('에러 상세:', {
-        status: error?.response?.status,
-        statusText: error?.response?.statusText,
-        data: error?.response?.data,
-        message: error?.message
-      })
-
-      // 403 Forbidden 에러 처리
-      // if (error?.response?.status === 403) {
-      //   alert('권한이 없습니다. 로그인 상태를 확인해주세요.')
-      // } else if (error?.response?.status === 401) {
-      //   alert('인증이 만료되었습니다. 다시 로그인해주세요.')
-      // } else {
-      //   const errorMessage =
-      //     error?.response?.data?.message ||
-      //     error?.message ||
-      //     '장바구니 추가 중 오류가 발생했습니다.'
-      //   alert(errorMessage)
-      // }
     } finally {
       setIsAdding(false)
     }

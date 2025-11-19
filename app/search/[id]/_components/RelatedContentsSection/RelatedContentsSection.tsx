@@ -47,7 +47,7 @@ const RelatedContentsSection = ({ className }: Props) => {
   }
 
   const handleCardClick = (id: number) => {
-    router.push(`/content/${id}`)
+    router.push(`/search/${id}`)
   }
 
   return (

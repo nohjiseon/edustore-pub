@@ -54,7 +54,7 @@ const SearchContents = () => {
   const { data } = useSearchQuery(searchCommand)
 
   const handleCardClick = (id: number) => {
-    router.push(`/content/${id}`)
+    router.push(`/search/${id}`)
   }
 
   const handleSortChange = (newSortType: SortType) => {

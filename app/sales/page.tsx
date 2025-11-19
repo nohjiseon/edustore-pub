@@ -382,7 +382,7 @@ const SalesPage = () => {
                       />
                     </div>
                     <Link
-                      href={`/content/${item.id}`}
+                      href={`/search/${item.id}`}
                       className={styles.content_box}
                     >
                       <div className={styles.thumbnail}>

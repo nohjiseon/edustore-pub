@@ -3,6 +3,11 @@ import axios, { AxiosError, InternalAxiosRequestConfig } from 'axios'
 import { useAuthStore } from '@/stores/auth'
 import Config from '~/constants/config'
 import { ErrorResponse } from '~/types/api'
+import { isMockMode } from '@/services/mocks/api.mock'
+import { handleMockRequest } from '@/services/mocks/handler'
+
+// 환경 변수로 모크 모드 확인
+const USE_MOCK_DATA = process.env.NEXT_PUBLIC_USE_MOCK_DATA === 'true'
 
 // API 클라이언트 생성
 const api = axios.create({
@@ -14,6 +19,14 @@ const api = axios.create({
     Accept: 'application/json'
   }
 })
+
+// 더미 데이터 모드일 때 axios adapter를 커스텀하여 모크 핸들러 사용
+if (USE_MOCK_DATA || isMockMode()) {
+  api.defaults.adapter = async (config: InternalAxiosRequestConfig) => {
+    const mockResponse = await handleMockRequest(config)
+    return Promise.resolve(mockResponse)
+  }
+}
 
 // 인증 데이터 타입 정의
 interface AuthData {
@@ -156,6 +169,13 @@ function shouldSkipAuth(url?: string): boolean {
 
 api.interceptors.request.use(
   async (config: InternalAxiosRequestConfig) => {
+    // 더미 데이터 모드일 때 모크 핸들러로 요청 전달
+    if (USE_MOCK_DATA || isMockMode()) {
+      // 모크 핸들러가 처리하도록 플래그 설정
+      ;(config as any).__mockMode = true
+      return config
+    }
+
     // 인증이 필요한 경로인 경우 Authorization 헤더 추가
     // Content-Type과 Accept는 axios 인스턴스 생성 시 기본 헤더로 이미 설정됨
     if (!shouldSkipAuth(config.url)) {
@@ -193,6 +213,8 @@ api.interceptors.response.use(
   function (response) {
     return response
   },
+  // 요청 단계에서 모크 모드로 처리하기 위해 요청 인터셉터에서 처리
+  // 여기서는 실제 에러만 처리
   async function (error: AxiosError<ErrorResponse>) {
     // 특정 URL에 대해 에러를 조용히 처리 (콘솔 에러 방지)
     const silentErrorUrls = ['/auth/v1/login/member/find-email']
