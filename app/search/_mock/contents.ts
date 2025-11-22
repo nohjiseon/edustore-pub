@@ -1,4 +1,9 @@
-import { ContentCardData } from '@/types/search'
+import { SearchResultModelSchema } from '@/entities/search/model'
+import {
+  ContentCardData,
+  SearchResultModel,
+  SearchResultItemModel
+} from '@/types/search'
 
 export const mockSearchContents: ContentCardData[] = [
   {
@@ -254,3 +259,85 @@ export const mockSearchContents: ContentCardData[] = [
       'https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?w=400&h=240&fit=crop&auto=format'
   }
 ]
+
+/**
+ * ContentCardData를 SearchResultItemModel로 변환
+ */
+const convertContentCardToSearchResultItem = (
+  content: ContentCardData,
+  index: number
+): SearchResultItemModel => {
+  return {
+    id: content.id,
+    title: content.title,
+    description: content.description,
+    price: content.price,
+    rating: content.rating,
+    imageSrc: content.imageSrc || '',
+    author: {
+      name: content.author.name,
+      avatar: content.author.avatar
+    },
+    tags: {
+      grade: content.tags.grade,
+      subject: content.tags.subject,
+      type: content.tags.type,
+      format: content.tags.format
+    },
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString()
+  }
+}
+
+/**
+ * 검색 결과 목업 데이터 생성
+ * ContentCardData 배열을 SearchResultModel로 변환
+ */
+export const createMockSearchResult = (command: {
+  searchKeyword?: string
+  page?: number
+  size?: number
+}): SearchResultModel => {
+  const page = command.page || 0
+  const size = command.size || 10
+
+  // 검색어에 따라 필터링
+  let filteredContents = mockSearchContents
+  if (command.searchKeyword) {
+    const keyword = command.searchKeyword.toLowerCase()
+    filteredContents = mockSearchContents.filter(
+      (content) =>
+        content.title.toLowerCase().includes(keyword) ||
+        content.description.toLowerCase().includes(keyword) ||
+        content.tags.grade?.toLowerCase().includes(keyword) ||
+        content.tags.subject?.toLowerCase().includes(keyword)
+    )
+  }
+
+  // 페이지네이션 적용
+  const start = page * size
+  const end = start + size
+  const paginatedContents = filteredContents.slice(start, end)
+
+  // SearchResultItemModel로 변환
+  const items: SearchResultItemModel[] = paginatedContents.map(
+    (content, index) =>
+      convertContentCardToSearchResultItem(content, start + index)
+  )
+
+  const total = filteredContents.length
+  const totalPages = Math.max(1, Math.ceil(total / size))
+  const hasNext = page < totalPages - 1
+
+  const result: SearchResultModel = {
+    items,
+    total,
+    page,
+    size,
+    hasNext,
+    totalPages
+  }
+
+  // Zod 스키마로 검증
+  return SearchResultModelSchema.parse(result) as SearchResultModel
+}

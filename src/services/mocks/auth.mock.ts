@@ -3,6 +3,7 @@
  */
 
 import { delay, createMockResponse } from './api.mock'
+
 import type { LoginRequest, LoginResponse } from '@/types/auth'
 
 /**
@@ -48,7 +49,7 @@ export async function mockLoginOrgan(
     loginId: 'ORG001',
     memberType: 'organization' as const,
     name: '테스트 기관',
-    nickname: undefined,
+    nickname: undefined as string | undefined,
     memNo: '2001'
   }
 

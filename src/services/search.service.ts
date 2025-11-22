@@ -8,6 +8,7 @@ import type { SearchApiResponseDtoValidated } from '@/entities/search/dto'
 import { toSearchResult } from '@/entities/search/mapper'
 import { SearchResultModelSchema } from '@/entities/search/model'
 import api from '@/lib/api'
+import { createMockSearchResult } from '@/services/mocks/search.mock'
 import type { SearchCommandDto, SearchResultModel } from '@/types/search'
 
 type SearchApiResponseDtoResult = SearchApiResponseDtoValidated
@@ -19,6 +20,8 @@ export const searchService = {
   /**
    * 상품 검색 (POST /search/v1/search)
    *
+   * ⚠️ 현재 목업 모드로 동작: 실제 API 호출 대신 목업 데이터 반환
+   *
    * @param command - 검색 파라미터 (SearchCommandDto)
    * @returns 검색 결과 (SearchApiResponseDto)
    * @throws 네트워크 오류나 검증 실패시 에러 발생
@@ -26,6 +29,61 @@ export const searchService = {
   search: async (
     command: SearchCommandDto
   ): Promise<SearchApiResponseDtoResult> => {
+    // 목업 모드: 실제 API 호출 대신 목업 데이터 반환
+    const mockResult = createMockSearchResult(command)
+
+    // SearchResultModel을 SearchApiResponseDto 형식으로 변환
+    return {
+      list: mockResult.items.map((item) => ({
+        product: {
+          productNo: item.id,
+          productNm: item.title,
+          title: item.title,
+          description: item.description,
+          price: item.price,
+          reviewAvgRating: item.rating,
+          rating: item.rating
+        },
+        categories: item.tags.type
+          ? [{ categoryId: 1, categoryName: item.tags.type }]
+          : [],
+        forms: item.tags.format
+          ? [{ formId: 1, formName: item.tags.format }]
+          : [],
+        gradeSubjects: [
+          {
+            gradeSubjectId: 1,
+            grade: item.tags.grade || '',
+            subject: item.tags.subject || '',
+            gradeSubjectName: `${item.tags.grade || ''} ${
+              item.tags.subject || ''
+            }`.trim()
+          }
+        ],
+        hashtags: [] as { hashtagId?: number; hashtagName?: string }[],
+        thumbnails: [
+          {
+            thumbnailId: item.id,
+            thumbnailUrl:
+              typeof item.imageSrc === 'string'
+                ? item.imageSrc
+                : item.imageSrc?.src || '',
+            thumbnailOrder: 1
+          }
+        ],
+        memberView: {
+          memNo: 1001,
+          name: item.author.name,
+          nickname: item.author.name,
+          email: '',
+          profileImgUrl: item.author.avatar || ''
+        },
+        isPaymentCompleted: false
+      })),
+      total: mockResult.total
+    }
+
+    /* 실제 API 호출 코드 (목업 모드로 비활성화)
     try {
       const response = await api.post('/search/v1/search', command)
       const apiData = response.data
@@ -69,15 +127,22 @@ export const searchService = {
       console.error('검색 API 호출 실패:', error)
       throw error
     }
+    */
   },
 
   /**
    * 검색 결과 Model 반환
    *
+   * ⚠️ 현재 목업 모드로 동작: 실제 API 호출 대신 목업 데이터 반환
+   *
    * @param command - 검색 파라미터 (SearchCommandDto)
    * @returns SearchResultModel (검증 완료)
    */
   fetchModel: async (command: SearchCommandDto): Promise<SearchResultModel> => {
+    // 목업 모드: 직접 목업 데이터 생성 및 반환
+    return createMockSearchResult(command)
+
+    /* 실제 API 호출 코드 (목업 모드로 비활성화)
     const dto = await searchService.search(command)
     const model = toSearchResult(dto, command.page, command.size)
 
@@ -86,6 +151,7 @@ export const searchService = {
     }
 
     return SearchResultModelSchema.parse(model) as SearchResultModel
+    */
   }
 }
 

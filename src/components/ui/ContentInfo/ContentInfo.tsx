@@ -35,6 +35,12 @@ const ContentInfo = ({
     return price.toLocaleString('ko-KR')
   }
 
+  // imageSrc가 유효하지 않은 경우 기본 이미지 사용
+  const validImageSrc =
+    imageSrc && (typeof imageSrc === 'string' ? imageSrc.trim() !== '' : true)
+      ? imageSrc
+      : defaultCardImage
+
   return (
     <div className={styles.content_info_container}>
       {checked !== undefined && (
@@ -49,7 +55,7 @@ const ContentInfo = ({
       <div className={styles.content_wrapper}>
         <div className={styles.thumbnail_wrapper}>
           <Image
-            src={imageSrc}
+            src={validImageSrc}
             alt={title}
             width={100}
             height={100}

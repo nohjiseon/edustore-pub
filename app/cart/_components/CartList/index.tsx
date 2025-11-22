@@ -4,6 +4,7 @@ import React, { useMemo, useState } from 'react'
 
 import styles from './CartList.module.scss'
 
+import defaultCardImage from '@/assets/images/contents/card_example.png'
 import { Icon } from '@/components/Icon'
 import ContentInfo from '@/components/ui/ContentInfo/ContentInfo'
 import { Tag } from '@/components/ui/TagList/TagList'
@@ -94,7 +95,7 @@ const CartList = () => {
                 title={item.title}
                 author={item.author}
                 price={item.price}
-                imageSrc={item.imageSrc}
+                imageSrc={defaultCardImage}
                 checked={selectedIds.includes(item.id)}
                 onDelete={() => handleDeleteItem(item.id)}
               />

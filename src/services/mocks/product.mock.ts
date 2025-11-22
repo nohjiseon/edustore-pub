@@ -3,6 +3,7 @@
  */
 
 import { delay } from './api.mock'
+
 import type {
   ProductResponse,
   ProductDetailResponse,
@@ -135,7 +136,7 @@ export async function mockGetProductDetail(
     email: 'teacher@example.com',
     nickname: '수학선생님',
     mobileNumber: '010-1234-5678',
-    birthday: null,
+    birthday: null as string | null,
     gradeSubjectList: mockGradeSubjects,
     categoryList: mockCategories,
     status: 'ACTIVE',
@@ -143,9 +144,9 @@ export async function mockGetProductDetail(
     profileImgUrl:
       'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=64&h=64&fit=crop&crop=face&auto=format',
     profileIntro: '수학 전문 강사입니다.',
-    organPoint: null,
-    businessNo: null,
-    organName: null
+    organPoint: null as number | null,
+    businessNo: null as string | null,
+    organName: null as string | null
   }
 
   return {
