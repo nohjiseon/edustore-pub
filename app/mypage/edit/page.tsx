@@ -282,7 +282,7 @@ const EditMypage = () => {
             <Icon name='edit-s' />
           </span>
         </div>
-        <p>{myInfo.name}님, 안녕하세요</p>
+        <p>{myInfo.name || '사용자'}님, 안녕하세요</p>
       </div>
 
       <div className={styles.card_wrap}>
@@ -296,7 +296,7 @@ const EditMypage = () => {
                 <Input
                   type='text'
                   className={styles.inp_gray}
-                  value={myInfo.name}
+                  value={myInfo.name || ''}
                   readOnly
                 />
               </li>
@@ -304,7 +304,7 @@ const EditMypage = () => {
                 <label>닉네임</label>
                 <Input
                   type='text'
-                  value={myInfo.nickname}
+                  value={myInfo.nickname || ''}
                   onClick={handleNicknameChange}
                   readOnly
                 />
@@ -317,7 +317,7 @@ const EditMypage = () => {
                 <label>이메일</label>
                 <Input
                   type='text'
-                  value={myInfo.email}
+                  value={myInfo.email || ''}
                   onClick={handleEmailChange}
                   readOnly
                 />
@@ -330,7 +330,7 @@ const EditMypage = () => {
                 <label>휴대폰 번호</label>
                 <Input
                   type='text'
-                  value={formatPhoneNumber(myInfo.mobileNumber)}
+                  value={formatPhoneNumber(myInfo.mobileNumber) || ''}
                   readOnly
                   onClick={handlePhoneChange}
                 />

@@ -1,10 +1,10 @@
 import axios, { AxiosError, InternalAxiosRequestConfig } from 'axios'
 
+import { isMockMode } from '@/services/mocks/api.mock'
+import { handleMockRequest } from '@/services/mocks/handler'
 import { useAuthStore } from '@/stores/auth'
 import Config from '~/constants/config'
 import { ErrorResponse } from '~/types/api'
-import { isMockMode } from '@/services/mocks/api.mock'
-import { handleMockRequest } from '@/services/mocks/handler'
 
 // 환경 변수로 모크 모드 확인
 const USE_MOCK_DATA = process.env.NEXT_PUBLIC_USE_MOCK_DATA === 'true'
@@ -176,7 +176,7 @@ api.interceptors.request.use(
       return config
     }
 
-    // 인증이 필요한 경로인 경우 Authorization 헤더 추가
+    // 인증 토큰이 있으면 헤더에 추가 (없어도 에러 발생하지 않음)
     // Content-Type과 Accept는 axios 인스턴스 생성 시 기본 헤더로 이미 설정됨
     if (!shouldSkipAuth(config.url)) {
       const token = TokenStorage.getAccessToken()
@@ -196,12 +196,8 @@ api.interceptors.request.use(
           console.log('요청 헤더 Accept:', config.headers['Accept'])
           console.log('전체 요청 헤더:', config.headers)
         }
-      } else {
-        if (config.url?.includes('/cart/v1/add')) {
-          console.warn('⚠️ API 요청 인터셉터 - 토큰이 없습니다!')
-          console.warn('URL:', config.url)
-        }
       }
+      // 토큰이 없어도 요청은 정상 진행 (에러 발생하지 않음)
     }
 
     return config
@@ -213,8 +209,7 @@ api.interceptors.response.use(
   function (response) {
     return response
   },
-  // 요청 단계에서 모크 모드로 처리하기 위해 요청 인터셉터에서 처리
-  // 여기서는 실제 에러만 처리
+  // 에러 처리 (로그인 관련 확인 로직 제거)
   async function (error: AxiosError<ErrorResponse>) {
     // 특정 URL에 대해 에러를 조용히 처리 (콘솔 에러 방지)
     const silentErrorUrls = ['/auth/v1/login/member/find-email']
@@ -235,90 +230,7 @@ api.interceptors.response.use(
       })
     }
 
-    const originalRequest = error.config as InternalAxiosRequestConfig & {
-      _retry?: boolean
-    }
-
-    if (
-      error.response?.status === 401 &&
-      originalRequest &&
-      !originalRequest._retry &&
-      !shouldSkipAuth(originalRequest.url)
-    ) {
-      originalRequest._retry = true
-
-      console.log('=== 401 에러 발생 - 토큰 갱신 시도 ===')
-      console.log('요청 URL:', originalRequest.url)
-      console.log('원본 요청 헤더:', originalRequest.headers)
-
-      const refreshToken = TokenStorage.getRefreshToken()
-      const currentToken = TokenStorage.getAccessToken()
-
-      console.log(
-        '현재 Access Token:',
-        currentToken ? `${currentToken.substring(0, 20)}...` : '없음'
-      )
-      console.log('Refresh Token 존재 여부:', !!refreshToken)
-
-      if (!refreshToken) {
-        console.error('❌ Refresh Token이 없습니다. 로그아웃 처리')
-        TokenStorage.clearAuthData()
-        return Promise.reject(error)
-      }
-
-      try {
-        console.log('토큰 갱신 API 호출 중...')
-        const { data } = await axios.post(
-          `${Config.API_BASE_URL}/auth/v1/refresh`,
-          { refreshToken }
-        )
-
-        const tokenData = data.data || data
-        console.log('✅ 토큰 갱신 성공')
-
-        // 기존 인증 데이터에서 user 정보 가져오기
-        const existingAuthData = TokenStorage.getAuthData()
-
-        if (existingAuthData) {
-          // 토큰만 갱신하고 user 정보는 유지 (autoLogin 상태 유지)
-          const isAutoLogin = TokenStorage.isAutoLogin()
-          TokenStorage.saveAuthData(
-            {
-              accessToken: tokenData.accessToken,
-              refreshToken: tokenData.refreshToken || refreshToken,
-              expireAt: tokenData.expireDt,
-              user: existingAuthData.user
-            },
-            isAutoLogin
-          )
-          console.log('✅ 새로운 토큰 저장 완료')
-        }
-
-        if (originalRequest.headers) {
-          originalRequest.headers.Authorization = `Bearer ${tokenData.accessToken}`
-          console.log('✅ 원본 요청에 새 토큰 설정 완료')
-        }
-
-        console.log('원본 요청 재시도 중...')
-        return api.request(originalRequest)
-      } catch (refreshError) {
-        console.error('❌ 토큰 갱신 실패:', refreshError)
-        console.error('에러 상세:', {
-          status: (refreshError as any).response?.status,
-          data: (refreshError as any).response?.data,
-          message: (refreshError as any).message
-        })
-
-        TokenStorage.clearAuthData()
-
-        if (typeof window !== 'undefined') {
-          useAuthStore.getState().logout()
-        }
-
-        return Promise.reject(refreshError)
-      }
-    }
-
+    // 401 에러 및 토큰 갱신 로직 제거 - 에러를 그대로 반환
     return Promise.reject(error)
   }
 )

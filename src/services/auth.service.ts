@@ -389,10 +389,17 @@ export const authService = {
 
   /**
    * 마이페이지 회원 정보 조회
+   * ⚠️ 현재 목업 모드로 동작: 실제 API 호출 대신 목업 데이터 반환
    */
   getMyPage: async (): Promise<any> => {
+    // 목업 모드: 실제 API 호출 대신 목업 데이터 반환
+    const { mockGetMyPage } = await import('@/services/mocks/auth.mock')
+    return mockGetMyPage()
+
+    /* 실제 API 호출 코드 (목업 모드로 비활성화)
     const response = await api.get('/member/v1/my-page')
     return response.data.data || response.data
+    */
   },
 
   /**

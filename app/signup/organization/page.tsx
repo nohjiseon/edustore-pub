@@ -133,7 +133,7 @@ const OrganizationSignupPage = () => {
 
           console.log('이메일 인증 검증 API 응답:', result)
 
-          if (!result.isSuccess && result.message !== 'OK') {
+          if (result && !result.isSuccess && result.message !== 'OK') {
             // API 검증 실패 시 상태를 false로 변경
             setIsVerified(false)
           }
@@ -158,20 +158,27 @@ const OrganizationSignupPage = () => {
         // 주소 검색 결과 데이터 처리
         const addressData = event.data
 
-        console.log('주소 검색 팝업에서 받은 데이터:111', addressData)
+        console.log('주소 검색 팝업에서 받은 데이터:', addressData)
 
         // 주소 정보 설정
         // 다양한 필드명에 대응 (API 응답 구조에 따라 다를 수 있음)
-        const address = addressData.payload.roadAddr
-        const detailAddress = addressData.payload.addrDetail
+        const payload = addressData?.payload || addressData
 
-        console.log('--------------')
+        if (payload) {
+          const address = payload.roadAddr || payload.address || ''
+          const detailAddress =
+            payload.addrDetail || payload.detailAddress || ''
 
-        console.log(address)
-        console.log(detailAddress)
+          console.log('주소:', address)
+          console.log('상세주소:', detailAddress)
 
-        setValue('address', address)
-        setValue('detailAddress', detailAddress)
+          if (address) {
+            setValue('address', address)
+          }
+          if (detailAddress) {
+            setValue('detailAddress', detailAddress)
+          }
+        }
       } catch (error) {
         console.error('주소 검색 결과 처리 에러:', error)
       }
@@ -225,6 +232,11 @@ const OrganizationSignupPage = () => {
           } catch (decryptError) {
             console.error('복호화 실패:', decryptError)
           }
+        } else if (resultData.isSuccess !== false) {
+          // data 필드가 없어도 isSuccess가 false가 아니면 성공으로 간주
+          setIsVerificationSent(true)
+          setTimer(180)
+          setIsVerified(false)
         }
       }
 
@@ -280,11 +292,15 @@ const OrganizationSignupPage = () => {
 
       const result = await authService.signupOrganization(signupData)
 
-      if (result.message === 'OK' || result.code === 200) {
+      if (
+        result?.message === 'OK' ||
+        result?.code === 200 ||
+        result?.isSuccess
+      ) {
         // alert('회원가입이 완료되었습니다.')
         router.push('/signup/complete?type=organizationSuccess')
       } else {
-        alert(result.message || '회원가입에 실패했습니다.')
+        alert(result?.message || '회원가입에 실패했습니다.')
       }
     } catch (error: any) {
       console.error('기관 회원가입 실패:', error)
@@ -311,22 +327,25 @@ const OrganizationSignupPage = () => {
       const result = await authService.checkBusinessNumber(businessNo)
 
       console.log(result)
-      if (result.message === 'OK') {
+      if (
+        result?.isSuccess ||
+        result?.message === 'OK' ||
+        result?.code === 200
+      ) {
         setIsBusinessVerified(true)
         setBusinessError('기관 정보가 정상적으로 확인되었습니다.')
       } else {
         setIsBusinessVerified(false)
-        setBusinessError(result.message || '기관 인증에 실패했습니다.')
+        setBusinessError(result?.message || '기관 인증에 실패했습니다.')
       }
     } catch (error: any) {
-      console.log(error.response.data.message)
+      console.error('사업자 등록번호 인증 실패:', error)
 
       setIsBusinessVerified(false)
-      // const errorMessage = error?.response?.data?.data?.message || error?.message || '사업자 등록번호 인증 중 오류가 발생했습니다.'
       const errorMessage =
-        error.response.data.message ||
+        error?.response?.data?.message ||
+        error?.message ||
         '사업자 등록번호 인증 중 오류가 발생했습니다.'
-      console.log(errorMessage)
 
       setBusinessError(errorMessage)
     } finally {

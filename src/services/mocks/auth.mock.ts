@@ -231,9 +231,31 @@ export async function mockGetMyPage() {
     name: '테스트 사용자',
     nickname: '테스터',
     mobileNumber: '010-1234-5678',
-    gradeCodeList: ['E01', 'E02'],
-    subjectCodeList: ['S01', 'S02'],
-    categoryList: ['C01']
+    profileImgUrl: '',
+    gradeSubjectList: [
+      {
+        gradeCode: 'E01',
+        gradeNm: '초등 1학년',
+        subjectCode: 'S01',
+        subjectNm: '국어'
+      },
+      {
+        gradeCode: 'E01',
+        gradeNm: '초등 1학년',
+        subjectCode: 'S02',
+        subjectNm: '수학'
+      },
+      {
+        gradeCode: 'E02',
+        gradeNm: '초등 2학년',
+        subjectCode: 'S01',
+        subjectNm: '국어'
+      }
+    ],
+    categoryList: [
+      { categoryNm: '독도', categoryCode: 'C01' },
+      { categoryNm: '어린이날', categoryCode: 'C02' }
+    ]
   }
 }
 

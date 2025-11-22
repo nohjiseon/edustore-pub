@@ -148,7 +148,7 @@ const PersonalSignupPage2 = () => {
   // 첫 번째 단계에서 전달받은 데이터
   const [step1Data, setStep1Data] = useState<SignupStep1Data | null>(null)
 
-  // localStorage에서 데이터 추출
+  // localStorage에서 데이터 추출 (리다이렉트 없이 데이터만 로드)
   useEffect(() => {
     const storedData = localStorage.getItem('signup_step1_data')
 
@@ -158,14 +158,11 @@ const PersonalSignupPage2 = () => {
         setStep1Data(parsedData)
       } catch (error) {
         console.error('데이터 파싱 에러:', error)
-        // 데이터가 잘못된 경우 첫 번째 단계로 리다이렉트
-        router.push('/signup/personal')
+        // 데이터 파싱 실패 시 step1Data는 null로 유지
       }
-    } else {
-      // 데이터가 없으면 첫 번째 단계로 리다이렉트
-      router.push('/signup/personal')
     }
-  }, [router])
+    // localStorage에 데이터가 없어도 페이지는 정상적으로 표시됨
+  }, [])
 
   const isTopicValid =
     topic.trim().length >= 2 &&

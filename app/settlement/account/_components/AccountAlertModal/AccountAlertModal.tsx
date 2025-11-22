@@ -114,14 +114,18 @@ const AccountAlertModal = ({
 
         console.log(response)
 
-        if (response.status === 200 || response.code === 200) {
+        if (
+          response?.status === 200 ||
+          response?.code === 200 ||
+          response?.isSuccess
+        ) {
           // 성공 시 콜백 호출
           if (onSuccess) {
             await onSuccess()
           }
           onOpenChange?.(false)
         } else {
-          throw new Error(response.message || '대표계좌 변경에 실패했습니다.')
+          throw new Error(response?.message || '대표계좌 변경에 실패했습니다.')
         }
       } catch (error) {
         console.error('대표계좌 변경 실패:', error)

@@ -125,7 +125,7 @@ const BoardPage = () => {
   }
 
   const handleRequestClick = () => {
-    router.push('/service')
+    router.push('/board/create')
   }
 
   const handleBoardClick = (id: number) => {

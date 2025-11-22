@@ -65,6 +65,7 @@ export interface AddBankAccountResponse {
   status: number
   code: number
   message: string
+  isSuccess?: boolean
 }
 
 /**
@@ -82,6 +83,7 @@ export interface UpdatePrimaryAccountResponse {
   status: number
   code: number
   message: string
+  isSuccess?: boolean
 }
 
 /**
@@ -92,6 +94,7 @@ export interface DeleteBankAccountResponse {
   status: number
   code: number
   message: string
+  isSuccess?: boolean
 }
 
 /**
@@ -100,6 +103,7 @@ export interface DeleteBankAccountResponse {
 export const accountService = {
   /**
    * 계좌 목록 조회
+   * ⚠️ 현재 목업 모드로 동작: 실제 API 호출 대신 목업 데이터 반환
    * @param params 페이지네이션 파라미터
    * @returns 계좌 목록 응답
    */
@@ -116,6 +120,13 @@ export const accountService = {
     code: number
     message: string
   }> => {
+    // 목업 모드: 실제 API 호출 대신 목업 데이터 반환
+    const { mockGetBankAccounts } = await import(
+      '@/services/mocks/account.mock'
+    )
+    return mockGetBankAccounts(params)
+
+    /* 실제 API 호출 코드 (목업 모드로 비활성화)
     const queryParams = new URLSearchParams()
     if (params?.page) {
       queryParams.append('page', params.page.toString())
@@ -148,25 +159,34 @@ export const accountService = {
         list: transformedList
       }
     }
+    */
   },
 
   /**
    * 계좌 추가
+   * ⚠️ 현재 목업 모드로 동작: 실제 API 호출 대신 목업 데이터 반환
    * @param data 계좌 정보
    * @returns 계좌 추가 응답
    */
   addBankAccount: async (
     data: AddBankAccountRequest
   ): Promise<AddBankAccountResponse> => {
+    // 목업 모드: 실제 API 호출 대신 목업 데이터 반환
+    const { mockAddBankAccount } = await import('@/services/mocks/account.mock')
+    return mockAddBankAccount()
+
+    /* 실제 API 호출 코드 (목업 모드로 비활성화)
     const response = await api.post<AddBankAccountResponse>(
       '/bank-account/v1',
       data
     )
     return response.data
+    */
   },
 
   /**
    * 계좌 대표계좌 설정 변경
+   * ⚠️ 현재 목업 모드로 동작: 실제 API 호출 대신 목업 데이터 반환
    * @param bankAccountNo 계좌 번호
    * @param data 대표계좌 설정 정보
    * @returns 계좌 업데이트 응답
@@ -175,21 +195,37 @@ export const accountService = {
     bankAccountNo: number,
     data: UpdatePrimaryAccountRequest
   ): Promise<UpdatePrimaryAccountResponse> => {
+    // 목업 모드: 실제 API 호출 대신 목업 데이터 반환
+    const { mockUpdateBankAccountPrimary } = await import(
+      '@/services/mocks/account.mock'
+    )
+    return mockUpdateBankAccountPrimary()
+
+    /* 실제 API 호출 코드 (목업 모드로 비활성화)
     const response = await api.put<UpdatePrimaryAccountResponse>(
       `/bank-account/v1/${bankAccountNo}`,
       data
     )
     return response.data
+    */
   },
 
   /**
    * 계좌 삭제 (개별 또는 다중)
+   * ⚠️ 현재 목업 모드로 동작: 실제 API 호출 대신 목업 데이터 반환
    * @param bankAccountNos 삭제할 계좌 번호 배열 (다중 삭제 시 콤마로 구분된 문자열로 전달)
    * @returns 계좌 삭제 응답
    */
   deleteBankAccounts: async (
     bankAccountNos: number[]
   ): Promise<DeleteBankAccountResponse> => {
+    // 목업 모드: 실제 API 호출 대신 목업 데이터 반환
+    const { mockDeleteBankAccounts } = await import(
+      '@/services/mocks/account.mock'
+    )
+    return mockDeleteBankAccounts()
+
+    /* 실제 API 호출 코드 (목업 모드로 비활성화)
     // 다중 삭제 시 콤마와 공백으로 구분된 문자열로 변환 (예: "321, 321")
     const bankAccountNosString = bankAccountNos.join(', ')
     const response = await api.delete<DeleteBankAccountResponse>(
@@ -198,5 +234,6 @@ export const accountService = {
       )}`
     )
     return response.data
+    */
   }
 }

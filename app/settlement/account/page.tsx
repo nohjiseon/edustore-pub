@@ -55,11 +55,11 @@ const AccountManagePage = () => {
         size: pageSize
       })
 
-      const accountList = response.data.list || []
+      const accountList = response?.data?.list || []
       setAccounts(accountList)
 
       // 총 페이지 수 계산
-      const total = response.data.total || 0
+      const total = response?.data?.total || 0
       const calculatedTotalPages = Math.ceil(total / pageSize) || 1
       setTotalPages(calculatedTotalPages)
     } catch (error) {
@@ -185,11 +185,20 @@ const AccountManagePage = () => {
       const response = await accountService.deleteBankAccounts(selectedIds)
       console.log(response)
 
-      await fetchAccounts(currentPage)
-
-      alert('계좌가 삭제되었습니다.')
-      setSelectedIds([])
+      if (
+        response?.status === 200 ||
+        response?.code === 200 ||
+        response?.isSuccess
+      ) {
+        await fetchAccounts(currentPage)
+        alert('계좌가 삭제되었습니다.')
+        setSelectedIds([])
+      } else {
+        alert(response?.message || '계좌 삭제에 실패했습니다.')
+      }
     } catch (error: any) {
+      console.error('계좌 삭제 실패:', error)
+      alert(error?.message || '계좌 삭제 중 오류가 발생했습니다.')
     } finally {
       setIsLoading(false)
     }
@@ -232,7 +241,11 @@ const AccountManagePage = () => {
         primaryYn: accountType === 'primary' ? 'Y' : 'N'
       })
 
-      if (response.status === 200 || response.code === 200) {
+      if (
+        response?.status === 200 ||
+        response?.code === 200 ||
+        response?.isSuccess
+      ) {
         alert('계좌가 추가되었습니다.')
         // 폼 초기화
         setNewAccountNumber('')
@@ -241,7 +254,7 @@ const AccountManagePage = () => {
         // 목록 다시 조회
         await fetchAccounts(currentPage)
       } else {
-        alert(response.message || '계좌 추가에 실패했습니다.')
+        alert(response?.message || '계좌 추가에 실패했습니다.')
       }
     } catch (error: any) {
       console.error('계좌 추가 실패:', error)
